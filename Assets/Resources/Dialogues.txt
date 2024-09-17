@@ -1,0 +1,9 @@
+narrator "Let's do a test"
+
+"ok"
+
+"one two three four."
+
+"中文好像不行？"
+
+"そだよ"
