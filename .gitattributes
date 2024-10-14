@@ -51,3 +51,5 @@
 *.meta linguist-generated
 *.prefab linguist-generated
 *.unity linguist-generated
+ShanHaiBaiChaShouShuW-2[[:space:]]SDF.asset filter=lfs diff=lfs merge=lfs -text
+SourceHanSansCN-Regular[[:space:]]SDF.asset filter=lfs diff=lfs merge=lfs -text
