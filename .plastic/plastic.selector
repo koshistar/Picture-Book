@@ -1,4 +1,0 @@
-repository "DropMoon@tj_6c0241f3_1dfc_4b36_a46b_b6f243d1b4f4@cloud.cn"
-  path "/"
-    br "/main"
-    co "/main"
