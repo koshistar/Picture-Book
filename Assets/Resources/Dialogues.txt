@@ -1,9 +1,115 @@
-narrator "Let's do a test"
+PlaySong("Ocean's Theme")
 
-"ok"
+CreateCharacter("tkc as TsuKiChya" -e false -i true)
 
-"one two three four."
+tkc.Move(0.25 0.5 -i true)
 
-"���ĺ����У�"
+月亮 "好疼，我这是掉到哪来了。"
+"好黑，好可怕，太阳，你在哪。"
+"真是奇怪的感觉，仿佛自己不再是自己了。"
+"有谁在吗，我是月亮，我似乎被某个行星撞到了这里。"
+"这里是哪，我要离开这里，我要会天上去。"
 
-"������"
+Narrator "一束淡蓝色的光逐渐靠近。"
+
+CreateCharacter("mk as MiKu" -e true -i true)
+
+mk.Move(0.5 0.5 -i true)
+
+??? "这里是魔法海洋。"
+
+mk.unhighlight()
+
+月亮 "是谁，唉，等等，海洋，我可不会游泳啊。"
+"呜哇，人类，人类行走在海洋里！我也行走在海洋里！"
+
+mk.highlight()
+
+人类 "看来你是真的第一次来到这里呢，看来有有必要好好和你解释一下了。"
+
+mk.unhighlight()
+
+月亮 "请务必！"
+
+mk.highlight()
+
+人类 "首先，我并不是人类，就像我之前所说的，这里是魔法海洋。"
+少女 "ֻ只是在这里的所有生物会变成人类的形状而已，当然也包括你。"
+
+Hidedb()
+
+[wait]mk.Move(0.75 0.5 -spd 0.75)
+[wait]tkc.Show()
+[wait]Showdb()
+
+mk.unhighlight()
+tkc.highlight()
+
+月亮 "真的耶，原来我也变成人形了。"
+
+tkc.unhighlight()
+mk.highlight()
+
+少女 "当然，在这里的所有生物是能够自由呼吸和行走的。"
+"我再奉劝你一句，在这里你最好不要到处宣称你的真实身份。"
+"为了你好，不要问为什么，在你在海洋里的这段时间内，你将作为人类少女爱丽丝行动。"
+
+mk.unhighlight()
+tkc.highlight()
+
+爱丽丝 "了解。"
+"这些都无所谓，我只想知道我怎样才能回到天空。"
+
+tkc.unhighlight()
+mk.highlight()
+
+少女 "虽然我和你一样，不能够像鱼群他们一样自由地在海洋中游动，不能够直接带你离开。"
+"但是，我可以给你提供一个方案。"
+
+mk.unhighlight()
+tkc.highlight()
+
+爱丽丝 "洗耳恭听。"
+
+tkc.unhighlight()
+mk.highlight()
+
+少女 "你现在似乎不能够自己发光，这在黑暗的海洋里可吸引不到鱼群们的注意。"
+
+mk.unhighlight()
+tkc.highlight()
+
+爱丽丝 "当然，我可是一直在依靠太阳的光的。"
+"那你的意思是有办法让我自己发光，然后吸引鱼群们的注意，请求他们带我离开吗。"
+
+tkc.unhighlight()
+mk.highlight()
+
+少女 "虽然不至于让你自己过发光，也不至于让你去求情。"
+"我可以让你通过创作来吸引鱼群们的注意，他们对于各种作品都十分痴迷。"
+"你只要让他们欣赏作品，想必也会欣然带你向上游去吧。"
+
+mk.unhighlight()
+tkc.highlight()
+
+爱丽丝 "哦！第一次听说。"
+
+tkc.unhighlight()
+mk.highlight()
+
+少女 "为了尽早进行创作，不如现在就去寻找魔法书，魔法竖琴，魔法海螺吧。"
+
+mk.unhighlight()
+tkc.highlight()
+
+爱丽丝 "哦！全是新东西，真是让人热血沸腾呢。"
+tkc.Move(0.7 0.5 -spd 0.5)
+
+wait(0.5)
+mk.Hide()
+tkc.Hide()
+
+Narrator "别以为我没告诉你wsad移动，e键进行互动。"
+
+[wait]HideUI(-s 0.5)
+nextScene(2)

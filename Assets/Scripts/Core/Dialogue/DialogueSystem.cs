@@ -15,10 +15,13 @@ namespace DIALOGUE
        // public NameContainer nameContainer = new NameContainer();
         private ConversationManager conversationManager;
         private TextArchitect architect;
+        [SerializeField] private CanvasGroup mainCanvas;
         public static DialogueSystem instance { get; private set; }
         public delegate void DialogueSystemEvent();
         public event DialogueSystemEvent onUserPrompt_Next;
         public bool isRunningConversation => conversationManager.isRunning;
+        public DialogueContinuePrompt prompt;
+        private CanvasGroupController cgController;
         private void Awake()
         {
             if (instance == null)
@@ -38,6 +41,8 @@ namespace DIALOGUE
                 return;
             architect = new TextArchitect(dialogueContainer.dialogueText);
             conversationManager = new ConversationManager(architect);
+            cgController = new CanvasGroupController(this, mainCanvas);
+            dialogueContainer.Initialize();
         }
         public void OnUserPrompt_Next()
         {
@@ -54,8 +59,12 @@ namespace DIALOGUE
             //Debug.Log("check4");
             dialogueContainer.SetDialogueColor(config.dialogueColor);
             dialogueContainer.SetDialogueFont(config.dialogueFont);
+            float fontSize = this.config.defaultDialogueFontSize * this.config.dialogueFontSacle * config.dialogueFontScale;
+            dialogueContainer.SetDialogueFontSize(fontSize);
             dialogueContainer.namecontainer.SetNameColor(config.nameColor);
             dialogueContainer.namecontainer.SetNameFont(config.nameFont);
+            fontSize = this.config.defaultNameFontSize * config.nameFontScale;
+            dialogueContainer.namecontainer.SetNameFontSize(fontSize);
         }
         public void ShowSpeakerName(string speakerName = "")
         {
@@ -78,6 +87,9 @@ namespace DIALOGUE
             //Debug.Log("check5");
             return conversationManager.StartConversation(conversation);
         }
+        public bool isVisible => cgController.isVisible;
+        public Coroutine Show(float speed = 1f, bool immediate = false) => cgController.Show(speed, immediate);
+        public Coroutine Hide(float speed = 1f, bool immediate = false) => cgController.Hide(speed, immediate);
         // Start is called before the first frame update
         void Start()
         {
