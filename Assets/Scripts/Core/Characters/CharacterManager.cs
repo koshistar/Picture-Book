@@ -8,6 +8,7 @@ namespace CHARACTERS
     public class CharacterManager : MonoBehaviour
     {
         public static CharacterManager instance {  get; private set; }
+        public Character[] allCharacters => characters.Values.ToArray();
         private Dictionary<string,Character> characters= new Dictionary<string,Character>();
         private CharacterConfigSO config => DialogueSystem.instance.config.characterConfigurationAsset;
         private const string CHARACTER_CASTING_ID = " as ";
@@ -50,8 +51,8 @@ namespace CHARACTERS
                 Debug.LogWarning($"A Character called '{characterName}' already exists.");
                 return null;
             }
-            CHARACTER_INFO info=GetCharacterInfo(characterName);
-            Character character=CreateCharacterFromInfo(info);
+            CHARACTER_INFO info = GetCharacterInfo(characterName);
+            Character character = CreateCharacterFromInfo(info);
             characters.Add(info.name.ToLower(), character);
             if (revealAfterCreation)
                 character.Show();
@@ -85,10 +86,6 @@ namespace CHARACTERS
                 case Character.CharacterType.Sprite:
                 case Character.CharacterType.SpriteSheet:
                     return new Character_Sprite(info.name, config,info.prefab, info.rootCharacterFolder);
-                case Character.CharacterType.Live2D:
-                    return new Character_Live2D(info.name, config,info.prefab, info.rootCharacterFolder);
-                case Character.CharacterType.Model3D:
-                    return new Character_Model3D(info.name, config,info.prefab, info.rootCharacterFolder);
                 default:
                     return null;
             }

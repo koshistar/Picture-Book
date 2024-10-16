@@ -79,11 +79,11 @@ namespace COMMANDS
                 }         
             }
             string characterName = databaseName;
-            if (CharacterManager.instance.HasCharacter(databaseName))   
+            if (CharacterManager.instance.HasCharacter(characterName))   
             {
                 List<string> newArgs=new List<string>(args);
                 newArgs.Insert(0, characterName);
-                args=newArgs.ToArray();
+                args = newArgs.ToArray();
                 return ExecuteCharacterCommand(subCommandName, args);
             }
             Debug.LogError($"No sub database calles '{databaseName}' extistd! Command '{subCommandName}' could not be run.");
@@ -168,13 +168,13 @@ namespace COMMANDS
             if (command is Action)
                 command.DynamicInvoke();
             else if (command is Action<string>)
-                command.DynamicInvoke(args[0]);
+                command.DynamicInvoke(args.Length == 0 ? string.Empty : args[0]);
             else if (command is Action<string[]>)
                 command.DynamicInvoke((object)args);
             else if (command is Func<IEnumerator>)
                 yield return ((Func<IEnumerator>)command)();
             else if (command is Func<string, IEnumerator>)
-                yield return ((Func<string, IEnumerator>)command)(args[0]);
+                yield return ((Func<string, IEnumerator>)command)(args.Length == 0 ? string.Empty : args[0]);
             else if (command is Func<string[], IEnumerator>)
                 yield return ((Func<string[], IEnumerator>)command)(args);
         }
