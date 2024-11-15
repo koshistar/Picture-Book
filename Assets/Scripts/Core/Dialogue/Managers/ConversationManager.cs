@@ -69,8 +69,6 @@ namespace DIALOGUE
             {
                 HandleSpeakerLogic(line.speakerData);
             }
-            if (!dialogueSystem.dialogueContainer.isVisible)
-                dialogueSystem.dialogueContainer.Show();
             //else
             //    dialogueSystem.HideSpeakerName();
             yield return BuildLineSegments(line.dialogueData);
@@ -183,13 +181,11 @@ namespace DIALOGUE
         }
         IEnumerator WaitForUserInput()
         {
-            dialogueSystem.prompt.Show();
             //Debug.Log("check16");
             while (!userPrompt)
             {
                 yield return null;
             }
-            dialogueSystem.prompt.Hide();
             userPrompt = false;
         }
         // Start is called before the first frame update

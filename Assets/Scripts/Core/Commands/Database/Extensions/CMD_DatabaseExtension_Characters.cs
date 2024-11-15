@@ -21,20 +21,13 @@ namespace COMMANDS
             database.AddCommand("movecharacter", new Func<string[],IEnumerator>(MoveCharacter));
             database.AddCommand("show", new Func<string[], IEnumerator>(ShowAll));
             database.AddCommand("hide", new Func<string[], IEnumerator>(HideAll));
+            database.AddCommand("setcolor", new Func<string[], IEnumerator>(SetColor));
             database.AddCommand("sort", new Action<string[]>(Sort));
-            database.AddCommand("highlight", new Func<string[], IEnumerator>(HideAll));
-            database.AddCommand("unhighlight", new Func<string[], IEnumerator>(HideAll));
             CommandDataBase baseCommands = CommandManager.instance.CreatSubDatabase(CommandManager.DATABASE_CHARACTERS_BASE);
             baseCommands.AddCommand("move",new Func<string[], IEnumerator>(MoveCharacter));
             baseCommands.AddCommand("show",new Func<string[], IEnumerator>(Show));
             baseCommands.AddCommand("hide",new Func<string[], IEnumerator>(Hide));
-            baseCommands.AddCommand("setcolor", new Func<string[], IEnumerator>(SetColor));
             baseCommands.AddCommand("setpriority",new Action<string[]>(SetPriority));
-            baseCommands.AddCommand("highlight",new Func<string[],IEnumerator>(Highlight));
-            baseCommands.AddCommand("unhighlight",new Func<string[],IEnumerator>(Unhighlight));
-            baseCommands.AddCommand("setposition",new Action<string[]>(SetPosition));
-            CommandDataBase spriteCommands = CommandManager.instance.CreatSubDatabase(CommandManager.DATABASE_CHARACTERS_SPRITE);
-            spriteCommands.AddCommand("setsprite", new Func<string[], IEnumerator>(SetSprite));
         }
         public static void CreateCharacter(string[] data)
         {
@@ -44,7 +37,7 @@ namespace COMMANDS
             var parameters = ConvertDataToParameters(data);
             parameters.TryGetValue(PARAM_ENABLE, out enable, defaultValue: false);
             parameters.TryGetValue(PARAM_IMMEDIATE, out immediate, defaultValue: false);
-            Character character = CharacterManager.instance.CreateCharacter(characterName);
+            Character character = CharacterManager.instance.CreateCharacter(characterName, revealAfterCreation: (!immediate ? enable : false));
             if(!enable)
             {
                 return;
@@ -70,7 +63,7 @@ namespace COMMANDS
             parameters.TryGetValue(PARAM_SPEED, out speed, defaultValue: 1);
             parameters.TryGetValue(PARAM_SMOOTH, out smooth, defaultValue: false);
             parameters.TryGetValue(PARAM_IMMEDIATE, out immediate, defaultValue: false);
-            Vector2 position = new Vector2(x, y);
+            Vector2 position = new Vector2((float)x, (float)y);
             if (immediate)
                 character.SetPosition(position);
             else
@@ -147,98 +140,6 @@ namespace COMMANDS
                     yield return null;
             }
         }
-        public static IEnumerator HighlightAll(string[] data)
-        {
-            List<Character> characters = new List<Character>();
-            bool immediate = false;
-            bool handleUnspecifiedCharacters = true;
-            List<Character> unspecifiedCharacters = new List<Character>();
-            for(int i = 0; i < data.Length; i++)
-            {
-                Character character = CharacterManager.instance.GetCharacter(data[i], createIfDoesNotExist: false);
-                if(character != null)
-                {
-                    characters.Add(character);
-                }
-            }
-            if (characters.Count == 0)
-                yield break;
-            var parameters = ConvertDataToParameters(data, startingIndex: 1);
-            parameters.TryGetValue(PARAM_IMMEDIATE, out immediate, defaultValue: false);
-            parameters.TryGetValue(new string[] { "-o", "-only" }, out handleUnspecifiedCharacters, defaultValue: true);
-            foreach (Character character in characters)
-                character.Highlight(immediate: immediate);
-            if(handleUnspecifiedCharacters)
-            {
-                foreach(Character character in CharacterManager.instance.allCharacters)
-                {
-                    if (characters.Contains(character))
-                        continue;
-                    unspecifiedCharacters.Add(character);
-                    character.UnHighlight(immediate: immediate);
-                }
-            }
-            if(!immediate)
-            {
-                CommandManager.instance.AddTerminationActionToCurrentProcess(() =>
-                {
-                    foreach (var character in characters)
-                        character.Highlight(immediate: true);
-                    if (!handleUnspecifiedCharacters)
-                        return;
-                    foreach (var character in unspecifiedCharacters)
-                        character.UnHighlight(immediate: true);
-                });
-                while (characters.Any(c => c.isHighlighting) || (handleUnspecifiedCharacters && unspecifiedCharacters.Any(uc => uc.isUnHighlighting)))
-                    yield return null;
-            }
-        }
-        public static IEnumerator UnHighlightAll(string[] data)
-        {
-            List<Character> characters = new List<Character>();
-            bool immediate = false;
-            bool handleUnspecifiedCharacters = true;
-            List<Character> unspecifiedCharacters = new List<Character>();
-            for (int i = 0; i < data.Length; i++)
-            {
-                Character character = CharacterManager.instance.GetCharacter(data[i], createIfDoesNotExist: false);
-                if (character != null)
-                {
-                    characters.Add(character);
-                }
-            }
-            if (characters.Count == 0)
-                yield break;
-            var parameters = ConvertDataToParameters(data, startingIndex: 1);
-            parameters.TryGetValue(PARAM_IMMEDIATE, out immediate, defaultValue: false);
-            parameters.TryGetValue(new string[] { "-o", "-only" }, out handleUnspecifiedCharacters, defaultValue: true);
-            foreach (Character character in characters)
-                character.UnHighlight(immediate: immediate);
-            if (handleUnspecifiedCharacters)
-            {
-                foreach (Character character in CharacterManager.instance.allCharacters)
-                {
-                    if (characters.Contains(character))
-                        continue;
-                    unspecifiedCharacters.Add(character);
-                    character.Highlight(immediate: immediate);
-                }
-            }
-            if (!immediate)
-            {
-                CommandManager.instance.AddTerminationActionToCurrentProcess(() =>
-                {
-                    foreach (var character in characters)
-                        character.UnHighlight(immediate: true);
-                    if (!handleUnspecifiedCharacters)
-                        return;
-                    foreach (var character in unspecifiedCharacters)
-                        character.Highlight(immediate: true);
-                });
-                while (characters.Any(c => c.isUnHighlighting) || (handleUnspecifiedCharacters && unspecifiedCharacters.Any(uc => uc.isHighlighting)))
-                    yield return null;
-            }
-        }
         public static IEnumerator SetColor(string[] data) 
         {
             Character character = CharacterManager.instance.GetCharacter(data[0], createIfDoesNotExist: false);
@@ -278,7 +179,7 @@ namespace COMMANDS
             }
             bool immediate = false;
             var parameters = ConvertDataToParameters(data);
-            parameters.TryGetValue(PARAM_IMMEDIATE,out immediate, defaultValue: false);
+            parameters.TryGetValue(new string[] {"-i","-immediate"},out immediate, defaultValue: false);
             if (immediate)
                 character.isVisible = true;
             else
@@ -296,7 +197,7 @@ namespace COMMANDS
             }
             bool immediate = false;
             var parameters = ConvertDataToParameters(data);
-            parameters.TryGetValue(PARAM_IMMEDIATE, out immediate, defaultValue: false);
+            parameters.TryGetValue(new string[] { "-i", "-immediate" }, out immediate, defaultValue: false);
             if (immediate)
                 character.isVisible = false;
             else
@@ -314,88 +215,6 @@ namespace COMMANDS
             if (!int.TryParse(data[1], out priority))
                 priority = 0;
             character.SetPriority(priority);
-        }
-        public static IEnumerator Highlight(string[] data)
-        {
-            Character character = CharacterManager.instance.GetCharacter(data[0], createIfDoesNotExist: false) as Character;
-            if(character==null)
-            {
-                yield break;
-            }
-            bool immediate = false;
-            var parameters = ConvertDataToParameters(data, startingIndex: 1);
-            parameters.TryGetValue(PARAM_IMMEDIATE, out immediate, defaultValue: false);
-            if (immediate)
-                character.Highlight(immediate: true);
-            else
-            {
-                CommandManager.instance.AddTerminationActionToCurrentProcess(() => { character?.Highlight(immediate: true); });
-                yield return character.Highlight();
-            }
-        }
-        public static IEnumerator Unhighlight(string[] data)
-        {
-            Character character = CharacterManager.instance.GetCharacter(data[0], createIfDoesNotExist: false) as Character;
-            if (character == null)
-            {
-                yield break;
-            }
-            bool immediate = false;
-            var parameters = ConvertDataToParameters(data, startingIndex: 1);
-            parameters.TryGetValue(PARAM_IMMEDIATE, out immediate, defaultValue: false);
-            if (immediate)
-                character.UnHighlight(immediate: true);
-            else
-            {
-                CommandManager.instance.AddTerminationActionToCurrentProcess(() => { character?.UnHighlight(immediate: true); });
-                yield return character.UnHighlight();
-            }
-        }
-        public static void SetPosition(string[] data)
-        {
-            Character character = CharacterManager.instance.GetCharacter(data[0], createIfDoesNotExist: false);
-            float x = 0, y = 0;
-            if(character==null||data.Length<2)
-            {
-                return;
-            }
-            var parameters=ConvertDataToParameters(data, 1);
-            parameters.TryGetValue(PARAM_XPOS, out x, defaultValue: 0);
-            parameters.TryGetValue(PARAM_YPOS, out y, defaultValue: 0);
-            character.SetPosition(new Vector2(x, y));
-
-        }
-        public static IEnumerator SetSprite(string[] data) 
-        {
-            Character_Sprite character = CharacterManager.instance.GetCharacter(data[0], createIfDoesNotExist: false) as Character_Sprite;
-            int layer = 0;
-            string spriteName;
-            bool immediate = false;
-            float speed;
-            if(character==null||data.Length<2)
-            {
-                yield break;
-            }
-            var parameters = ConvertDataToParameters(data, startingIndex: 1);
-            parameters.TryGetValue(new string[] { "-s", "-sprite" }, out spriteName);
-            parameters.TryGetValue(new string[] { "-l", "-layer" }, out layer, defaultValue: 0);
-            bool specifiedSpeed = parameters.TryGetValue(PARAM_SPEED, out speed, defaultValue: 0.1f);
-            if (!specifiedSpeed)
-                parameters.TryGetValue(PARAM_IMMEDIATE, out immediate, defaultValue: true);
-            Sprite sprite = character.GetSprite(spriteName);
-            if(sprite==null)
-            {
-                yield break;
-            }
-            if(immediate)
-            {
-                character.SetSprite(sprite, layer);
-            }    
-            else
-            {
-                CommandManager.instance.AddTerminationActionToCurrentProcess(() => { character?.SetSprite(sprite, layer); });
-                yield return character.TransitionSprite(sprite, layer, speed);
-            }
         }
     }
 }

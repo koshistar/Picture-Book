@@ -29,7 +29,7 @@ namespace COMMANDS
             }
         }
         public bool TryGetValue<T>(string parameterName, out T value, T defaultValue = default(T)) => TryGetValue(new string[] { parameterName }, out value, defaultValue);
-        public bool TryGetValue<T>(string[] parameterNames,out T value,T defaultValue = default(T))
+        public bool TryGetValue<T>(string[] parameterNames,out T value,T defaultValue=default(T))
         {
             foreach(string parameterName in parameterNames) 
             {

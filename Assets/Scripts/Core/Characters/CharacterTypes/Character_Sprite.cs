@@ -124,20 +124,11 @@ namespace CHARACTERS
             }
             co_changingColor = null;
         }
-        public override IEnumerator Highlighting(float speedMultiplier, bool immediate = false)
+        public override IEnumerator Highlighting(float speedMultiplier)
         {
             Color targetColor = displayColor;
             foreach (CharacterSpriteLayer layer in layers)
-            {
-                if (immediate)
-                {
-                    layer.Setcolor(displayColor);
-                }
-                else
-                {
-                    layer.TransitionColor(targetColor, speedMultiplier);
-                }
-            }
+                layer.TransitionColor(targetColor, speedMultiplier);
             yield return null;
             while (layers.Any(l => l.isChangingColor))
                 yield return null;

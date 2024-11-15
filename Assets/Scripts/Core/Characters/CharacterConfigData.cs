@@ -15,8 +15,6 @@ namespace CHARACTERS
         public Color dialogueColor;
         public TMP_FontAsset nameFont;
         public TMP_FontAsset dialogueFont;
-        public float nameFontScale = 1f;
-        public float dialogueFontScale = 1f;
         public CharacterConfigData Copy()
         {
             CharacterConfigData result = new CharacterConfigData();
@@ -27,8 +25,6 @@ namespace CHARACTERS
             result.dialogueFont = dialogueFont;
             result.nameColor=new Color(nameColor.r,nameColor.g, nameColor.b, nameColor.a);
             result.dialogueColor = new Color(dialogueColor.r, dialogueColor.g, dialogueColor.b, dialogueColor.a);
-            result.dialogueFontScale = dialogueFontScale;
-            result.nameFontScale = nameFontScale;
             return result;
         }
         private static Color defaultColor => DialogueSystem.instance.config.defaultTextColor;
@@ -45,8 +41,6 @@ namespace CHARACTERS
                 result.dialogueFont = defaultFont;
                 result.nameColor = new Color(defaultColor.r, defaultColor.g, defaultColor.b, defaultColor.a);
                 result.dialogueColor = new Color(defaultColor.r, defaultColor.g, defaultColor.b, defaultColor.a);
-                result.dialogueFontScale = 1f;
-                result.nameFontScale = 1f;
                 return result;
             }
         }

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class keyE : MonoBehaviour
 {
@@ -10,34 +9,25 @@ public class keyE : MonoBehaviour
 
 	//private void OnTriggerEnter(Collider other)
 	//{	
-	//	Debug.Log("ï¿½ï¿½×²ï¿½ï¿½");
+	//	Debug.Log("Åö×²ÁË");
 	//	if (other.tag=="Enemy")
 	//	{
-	//		ui.text =  other.name+"\nï¿½ï¿½ï¿½ï¿½ E ï¿½ï¿½ï¿½Ô¶Ô»ï¿½:";
+	//		ui.text =  other.name+"\n°´ÏÂ E ¼üÒÔ¶Ô»°:";
 	//	}			
 	//}
 	private void OnCollisionEnter(Collision collision)
 	{
 
-		//Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" + collision.collider.name+"ï¿½Äµï¿½ï¿½ï¿½");
-		ui.text = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" + collision.collider.name + "ï¿½Äµï¿½ï¿½ï¿½" + "\nï¿½ï¿½ E ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô»ï¿½";
+		//Debug.Log("Äã×ßÈëÁËÉñÈË" + collision.collider.name+"µÄµØÅÌ");
+		ui.text = "Äã×ßÈëÁËÉñÈË" + collision.collider.name + "µÄµØÅÌ" + "\n°´ E ¼ü¿ªÆô¶Ô»°";
 	}
 	private void OnCollisionStay(Collision collision)
 	{
 		if (Input.GetKey(KeyCode.E))
+		if (collision.collider.tag == "Enemy")
 		{
-			if (collision.collider.tag == "Enemy1")
-			{
-				ui.text = collision.collider.name + ':' + '"' + "ï¿½ï¿½Òªï¿½ï¿½ï¿½ã¿ªï¿½ï¿½ï¿½ï¿½" + '"';
-				SceneManager.LoadScene(3);
-				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½Ö¶Ô»ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ß¼ï¿½
-			}
-            if (collision.collider.tag == "Enemy2")
-            {
-                ui.text = collision.collider.name + ':' + '"' + "ï¿½ï¿½Òªï¿½ï¿½ï¿½ã¿ªï¿½ï¿½ï¿½ï¿½" + '"';
-                SceneManager.LoadScene(4);
-                //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½Ö¶Ô»ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ß¼ï¿½
-            }
-        }
+			ui.text = collision.collider.name + ':'+'"'+"ÎÒÒª¶ÔÄã¿ª´óÀ²" +'"';
+			//ÔÚÕâÀïÊµÏÖ¶Ô»°µÈÊÂ¼þµÄÂß¼­
+		}
 	}
 }
