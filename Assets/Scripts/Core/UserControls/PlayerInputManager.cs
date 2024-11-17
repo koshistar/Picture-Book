@@ -5,10 +5,6 @@ using UnityEngine;
 
 public class PlayerInputManager : MonoBehaviour
 {
-    public GameObject pausePanel;
-    //public List<AudioSource> audioSources;
-    //private int i = 1;
-    private bool isAwake=false;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,34 +18,9 @@ public class PlayerInputManager : MonoBehaviour
         {
             PromptAdvance();
         }
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            Pause();
-        }
     }
     public void PromptAdvance()
     {
-        Debug.Log("Get input");
-        //if(i<1)
-        //audioSources[i++].Play();
         DialogueSystem.instance.OnUserPrompt_Next();
-    }
-    public void Exit()
-    {
-        Application.Quit();
-    }
-    public void Pause()
-    {
-        if (isAwake)
-        {
-            pausePanel.SetActive(false);
-            Time.timeScale = 1.0f;
-        }
-        else
-        {
-            pausePanel.SetActive(true);
-            Time.timeScale = 0;
-        }
-        isAwake = !isAwake;
     }
 }

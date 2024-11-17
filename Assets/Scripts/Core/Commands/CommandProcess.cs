@@ -14,7 +14,7 @@ namespace COMMANDS
         public CoroutineWrapper runningProcess;
         public string[] args;
         public UnityEvent onTerminateAction;
-        public CommandProcess(Guid id,string processName,Delegate command,CoroutineWrapper runningProcess,string[] args,UnityEvent onTerminateAction=null)
+        public CommandProcess(Guid id,string processName,Delegate command,CoroutineWrapper runningProcess,string[] args,UnityEvent onTerminateAction = null)
         {
             ID = id;
             this.processName = processName;

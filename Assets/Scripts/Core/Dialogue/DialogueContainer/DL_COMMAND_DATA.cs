@@ -45,7 +45,7 @@ namespace DIALOGUE
                 else
                     command.waitForCompletion = false;
                 command.arguments = GetArgs(cmd.Substring(index + 1, cmd.Length - index - 2));
-                Debug.Log(command.arguments[0]);
+                //Debug.Log(command.arguments[0]);
                 result.Add(command);
             }
             //Debug.Log("check9-9");

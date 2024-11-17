@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class Program : MonoBehaviour
 {
     public RawImage showImage;
-    public Text outcome;
     public InputField inputText;
     public Button SendBtn;
     private string APIexePath = Application.streamingAssetsPath + "/../qianfanAPI/qianfan_paint.exe";
@@ -46,7 +45,6 @@ public class Program : MonoBehaviour
             string error = process.StandardError.ReadToEnd();
 
             process.WaitForExit();
-            outcome.text = output;
         }
     }
     /// <summary>
