@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Xml.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +10,6 @@ public class findTexts : MonoBehaviour
 {
     int btnNum = 0;
     public Button FindBtn;
-    public GameObject TxtTxt;
     public GameObject TextBtn;
     public InputField inputText;
     private List<string> textFiles = new List<string> ();
@@ -35,19 +35,24 @@ public class findTexts : MonoBehaviour
 
         GameObject TxtContainer = GameObject.Find("TxtContainer");
         var ContainerRectTransform = TxtContainer.transform.GetComponent<RectTransform>();
-        btnLength = ContainerRectTransform.rect.width;
+        btnLength = ContainerRectTransform.rect.width - 10;
         
         GameObject TxtList = GameObject.Find("TxtList");
         var rectTransform = TxtList.transform.GetComponent<RectTransform>();
+        TxtList.transform.localPosition = new Vector3(0, 0 - (btnHeight * btnCount) / 2 - rectTransform.rect.height / 2, 0);
         rectTransform.sizeDelta = new Vector2(btnLength, btnHeight * btnCount);
 
         for (int i = btnNum; i < btnCount; i++)
         {
             string text = textFiles[i];
+            string[] textTxt = File.ReadAllLines(txtDirPath + "/" + text + ".txt");
+            string colorHex = textTxt[textTxt.Length - 1];
+            UnityEngine.ColorUtility.TryParseHtmlString("#" + colorHex, out Color color);
 
             //Debug.Log(rectTransform.rect.width);
             GameObject TextBtnClone = Instantiate(TextBtn);
             TextBtnClone.transform.SetParent(TxtList.transform);
+            TextBtnClone.GetComponent<Outline>().effectColor = color;
             TextBtnClone.transform.localScale = new Vector3(1, 1, 1);    //由于克隆的Button缩放被设置为0，所以这里要设置为1
             TextBtnClone.transform.localPosition = new Vector3(0, btnPos, 0);
             var btn_rectTransform = TextBtnClone.transform.GetComponent<RectTransform>();
@@ -113,9 +118,9 @@ public class findTexts : MonoBehaviour
     {
         string[] textTxt = File.ReadAllLines(txtDirPath + "/" + txtName + ".txt");
 
-        TxtTxt = GameObject.Find("TxtTxt");
+        GameObject TxtTxt = GameObject.Find("TxtTxt");
         int btnPos = 0; //第一个Button的Y轴位置
-        int btnHeight = 60; //Button的高度
+        int btnHeight = 80; //Button的高度
         int btnCount = textTxt.Length; //Button的数量
 
         GameObject TxtTxtList = GameObject.Find("TxtTxtList");
@@ -123,12 +128,24 @@ public class findTexts : MonoBehaviour
         TxtTxtList.transform.localPosition = new Vector3(0, 0 - (((btnHeight * btnCount) / 2) - (rectTransform.rect.height / 2)), 0);
         float width = rectTransform.rect.width;
         rectTransform.sizeDelta = new Vector2(width, btnHeight * btnCount);
+        string colorHex = textTxt[btnCount - 1];
+        UnityEngine.ColorUtility.TryParseHtmlString("#" + colorHex, out Color color);
+        color.a = 0.5f;
+        TxtTxtList.GetComponent<Image>().color = color;
+        color.a = 0.8f;
+        GameObject sendBtn = GameObject.Find("sendBtn");
+        var sendBtnRectTransform = sendBtn.transform.GetComponent<RectTransform>();
+        sendBtnRectTransform.sizeDelta = new Vector2(sendBtnRectTransform.rect.width - 10, sendBtnRectTransform.rect.height - 10);
+        sendBtn.GetComponent<Outline>().effectDistance = new Vector2(5, 5);
+        sendBtn.GetComponent<Outline>().effectColor = color;
+
+
 
         RemoveAllChildren(TxtTxtList);
-        for (int i = 2; i < btnCount; i++)
+        for (int i = 2; i < btnCount - 1; i++)
         {
             Debug.Log(textTxt[i]);
-            string text = textTxt[i];
+            string text = textTxt[i].Replace(" ","");
 
             GameObject TxtTxtClone = Instantiate(TxtTxt);
             TxtTxtClone.transform.SetParent(TxtTxtList.transform);
