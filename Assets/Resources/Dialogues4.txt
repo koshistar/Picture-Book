@@ -1,0 +1,98 @@
+Narrator "抵达中层海域。"
+
+PlaySong("Mysterious Echo" -l true)
+CreateCharacter("tkc as TsuKiChya" -e true -i true)
+CreateCharacter("ly as MiKu" -e true -i true)
+tkc.Move(0.25 0.5 -i true)
+ly.Move(0.75 0.5 -i true)
+tkc.highlight()
+ly.unhighlight()
+
+PlayVoice("tk37")
+爱丽丝 "小流萤～"
+tkc.unhighlight()
+ly.highlight()
+StopVoice("tk37")
+PlayVoice("shi28")
+流萤 "我是不会帮忙的。"
+ly.unhighlight()
+tkc.highlight()
+StopVoice("shi28")
+PlayVoice("tk38")
+爱丽丝 "好厉害，原来我们已经心有灵犀了吗。"
+StopVoice("tk38")
+PlayVoice("tk39")
+"话说这里已经不是深海了，小流萤你没事吧？"
+tkc.unhighlight()
+ly.highlight()
+StopVoie("tk39")
+PlayVoice("shi29")
+流萤 "为什么这么问？"
+ly.unhighlight()
+tkc.highlight()
+StopVoice("shi29")
+PlayVoice("tk40")
+爱丽丝 "因为你整个给我一种深海少女的感觉呀。"
+StopVoice("tk40")
+PlayVoice("tk41")
+"所以我就想你会不会有只能在深海才能正常生存，之类的设定。"
+tkc.unhighlight()
+ly.highlight()
+StopVoice("tk41")
+PlayVoice("shi30")
+流萤 "这是哪来的设定啊，枉费你的担心了，我很健康。"
+ly.unhighlight()
+tkc.highlight()
+StopVoice("shi30")
+PlayVoice("tk42")
+爱丽丝 "那就好。"
+tkc.Hide()
+ly.Hide()
+
+Narrator "..."
+
+tkc.Move(0.5 0.5 -i true)
+tkc.Show()
+StopVoice("tk42")
+PlayVoice("tk43")
+爱丽丝 "奥义·鱼群召唤之术。"
+StopVoice("tk43")
+tkc.Hide()
+Narrator "……"
+"……"
+"……"
+tkc.Move(0.25 0.5 -i true)
+tkc.Show()
+ly.Show()
+StopVoice("tk43")
+PlayVoice("tk44")
+爱丽丝 "为什么没有鱼群聚过来啊！"
+tkc.unhighlight()
+ly.highlight()
+StopVoice("tk44")
+PlayVoice("shi31")
+流萤 "是光太弱了吗，毕竟现在到了白天。"
+ly.unhighlight()
+tkc.highlight()
+StopVoice("shi31")
+PlayVoice("tk45")
+爱丽丝 "那我们怎么办，要慢慢地等晚上到来吗。"
+tkc.unhighlight()
+ly.highlight()
+StopVoice("tk45")
+PlayVoice("shi32")
+流萤 "不，要是什么都不做，到了晚上，想必我们又会沉入深海去吧。"
+StopVoice("shi32")
+PlayVoice("shi33")
+"所以，抓紧时间制作出能盖过阳光的光吧。"
+ly.unhighlight()
+tkc.highlight()
+StopVoice("shi33")
+PlayVoice("tk46")
+爱丽丝 "真没想到连这里都能感受到阳光，太阳真是厉害啊。"
+tkc.Hide()
+ly.Hide()
+
+HideUI(-s 0.5)
+StopSong("Mysterious Echo")
+nextScene(6)

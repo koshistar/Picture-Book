@@ -1,0 +1,10 @@
+CreateCharacter("tkc as TsuKiChya" -e true -i false)
+tkc.Move(0.5 0.5 -i true)
+PlayVoice("tk64")
+爱丽丝 "我需要更多的颜色，更多的光，这点光根本不够。"
+StopVoice("tk64")
+"……"
+tkc.Hide()
+
+HideUI(-s 0.5)
+nextScene(9)

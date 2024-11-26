@@ -1,0 +1,10 @@
+CreateCharacter("tkc as TsuKiChya" -e true -i false)
+tkc.Move(0.5 0.5 -i true)
+PlayVoice("tk65")
+爱丽丝 "不够，完全不够，只有光是不行的。"
+StopVoice("tk65")
+"……"
+tkc.Hide()
+
+HideUI(-s 0.5)
+nextScene(10)

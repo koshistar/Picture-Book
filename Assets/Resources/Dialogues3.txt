@@ -1,0 +1,43 @@
+PlaySong("Sea of Dreams1" -l true)
+CreateCharacter("tkc as TsuKiChya" -e true -i true)
+CreateCharacter("ly as MiKu" -e true -i true)
+tkc.Move(0.25 0.5 -i true)
+ly.Move(0.75 0.5 -i true)
+tkc.highlight()
+ly.unhighlight()
+
+PlayVoice("tk32")
+爱丽丝 "呜哇，累死我了，现在又可以合成光了吧。"
+StopVoice("tk32")
+PlayVoice("tk33")
+"看我这么努力的份上，小流萤能不能给我一点奖励，比如……"
+tkc.unhighlight()
+ly.highlight()
+StopVoice("tk33")
+PlayVoice("shi27")
+流萤 "没有。"
+ly.unhighlight()
+tkc.highlight()
+StopVoice("shi27")
+PlayVoice("tk34")
+爱丽丝 "唉，明明我还什么都没说呢。"
+StopVoice("tk34")
+PlayVoice("tk35")
+"嘛，算了，奥义·鱼群召唤之术。"
+
+tkc.Hide()
+ly.Hide()
+StopVoice("tk35")
+深海鱼1 "你们是谁，竟然能够在这么黑暗的海洋里产生光。"
+深海鱼2 "哇，终于见到光了，你们能产生更大更亮的光吗，照亮整片海洋那种。"
+深海鱼3 "真的吗，你们是这片海洋的救世主吗。"
+Narrator "鱼群们嘈杂的讨论声不绝于耳。"
+tkc.Show()
+
+PlayVoice("tk36")
+爱丽丝 "哎嘿，还真是一模一样的反应呢。"
+
+tkc.Hide()
+HideUI(-s 0.5)
+StopSong("Sea of Dreams1")
+nextScene(5)

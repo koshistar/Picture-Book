@@ -28,9 +28,9 @@ public class findTexts : MonoBehaviour
     public void InstantiateList()
     {
         TextBtn = GameObject.Find("textBtn");
-        int btnPos = 0; //µÚÒ»¸öButtonµÄYÖáÎ»ÖÃ
-        int btnHeight = 40; //ButtonµÄ¸ß¶È
-        int btnCount = textFiles.Count; //ButtonµÄÊýÁ¿
+        int btnPos = 0; //ï¿½ï¿½Ò»ï¿½ï¿½Buttonï¿½ï¿½Yï¿½ï¿½Î»ï¿½ï¿½
+        int btnHeight = 40; //Buttonï¿½Ä¸ß¶ï¿½
+        int btnCount = textFiles.Count; //Buttonï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         float btnLength = 0;
 
         GameObject TxtContainer = GameObject.Find("TxtContainer");
@@ -48,7 +48,7 @@ public class findTexts : MonoBehaviour
             //Debug.Log(rectTransform.rect.width);
             GameObject TextBtnClone = Instantiate(TextBtn);
             TextBtnClone.transform.SetParent(TxtList.transform);
-            TextBtnClone.transform.localScale = new Vector3(1, 1, 1);    //ÓÉÓÚ¿ËÂ¡µÄButtonËõ·Å±»ÉèÖÃÎª0£¬ËùÒÔÕâÀïÒªÉèÖÃÎª1
+            TextBtnClone.transform.localScale = new Vector3(1, 1, 1);    //ï¿½ï¿½ï¿½Ú¿ï¿½Â¡ï¿½ï¿½Buttonï¿½ï¿½ï¿½Å±ï¿½ï¿½ï¿½ï¿½ï¿½Îª0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½Îª1
             TextBtnClone.transform.localPosition = new Vector3(0, btnPos, 0);
             var btn_rectTransform = TextBtnClone.transform.GetComponent<RectTransform>();
             btn_rectTransform.sizeDelta = new Vector2(btnLength, btnHeight);
@@ -57,17 +57,17 @@ public class findTexts : MonoBehaviour
             (
                 () =>
                 {
-                    TextBtnFunc(text);    //Ìí¼Ó°´Å¥µã»÷ÊÂ¼þ
+                    TextBtnFunc(text);    //ï¿½ï¿½ï¿½Ó°ï¿½Å¥ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
                 }
             );
 
-            //ÏÂÒ»¸öButtonµÄÎ»ÖÃµÈÓÚµ±Ç°¼õÈ¥ËûµÄ¸ß¶È
+            //ï¿½ï¿½Ò»ï¿½ï¿½Buttonï¿½ï¿½Î»ï¿½Ãµï¿½ï¿½Úµï¿½Ç°ï¿½ï¿½È¥ï¿½ï¿½ï¿½Ä¸ß¶ï¿½
             btnPos = btnPos - btnHeight;
         }
         btnNum = btnCount;
     }
     /// <summary>
-    /// »ñµÃÎÄ¼þÏÂµÄËùÓÐÎÄ¼þÃû
+    /// ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Âµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
     /// </summary>
     private void GetDirectoryFile()
     {
@@ -96,9 +96,9 @@ public class findTexts : MonoBehaviour
                     continue;
                 }
                 textFiles.Add(files[i].Name.Replace(".txt", ""));
-                //UnityEngine.Debug.Log("Name : " + textFiles[i].Name);//ÎÄ¼þÃû
-                Debug.Log("FullName : " + files[i].FullName);//¸ùÄ¿Â¼ÏÂµÄÎÄ¼þµÄÄ¿Â¼
-                //UnityEngine.Debug.Log("DirectoryName : " + textFiles[i].DirectoryName);//¸ùÄ¿Â¼
+                //UnityEngine.Debug.Log("Name : " + textFiles[i].Name);//ï¿½Ä¼ï¿½ï¿½ï¿½
+                Debug.Log("FullName : " + files[i].FullName);//ï¿½ï¿½Ä¿Â¼ï¿½Âµï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ä¿Â¼
+                //UnityEngine.Debug.Log("DirectoryName : " + textFiles[i].DirectoryName);//ï¿½ï¿½Ä¿Â¼
             }
             InstantiateList();
         }
@@ -114,9 +114,9 @@ public class findTexts : MonoBehaviour
         string[] textTxt = File.ReadAllLines(txtDirPath + "/" + txtName + ".txt");
 
         TxtTxt = GameObject.Find("TxtTxt");
-        int btnPos = 0; //µÚÒ»¸öButtonµÄYÖáÎ»ÖÃ
-        int btnHeight = 60; //ButtonµÄ¸ß¶È
-        int btnCount = textTxt.Length; //ButtonµÄÊýÁ¿
+        int btnPos = 0; //ï¿½ï¿½Ò»ï¿½ï¿½Buttonï¿½ï¿½Yï¿½ï¿½Î»ï¿½ï¿½
+        int btnHeight = 60; //Buttonï¿½Ä¸ß¶ï¿½
+        int btnCount = textTxt.Length; //Buttonï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
         GameObject TxtTxtList = GameObject.Find("TxtTxtList");
         var rectTransform = TxtTxtList.transform.GetComponent<RectTransform>();
@@ -132,7 +132,7 @@ public class findTexts : MonoBehaviour
 
             GameObject TxtTxtClone = Instantiate(TxtTxt);
             TxtTxtClone.transform.SetParent(TxtTxtList.transform);
-            TxtTxtClone.transform.localScale = new Vector3(1, 1, 1);    //ÓÉÓÚ¿ËÂ¡µÄButtonËõ·Å±»ÉèÖÃÎª0£¬ËùÒÔÕâÀïÒªÉèÖÃÎª1
+            TxtTxtClone.transform.localScale = new Vector3(1, 1, 1);    //ï¿½ï¿½ï¿½Ú¿ï¿½Â¡ï¿½ï¿½Buttonï¿½ï¿½ï¿½Å±ï¿½ï¿½ï¿½ï¿½ï¿½Îª0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½Îª1
             TxtTxtClone.transform.localPosition = new Vector3(0, btnPos, 0);
             var btn_rectTransform = TxtTxtClone.transform.GetComponent<RectTransform>();
             btn_rectTransform.sizeDelta = new Vector2(width, btnHeight);
@@ -141,21 +141,21 @@ public class findTexts : MonoBehaviour
             (
                 () =>
                 {
-                    Click(txtName + text);    //Ìí¼Ó°´Å¥µã»÷ÊÂ¼þ
+                    Click(txtName + text);    //ï¿½ï¿½ï¿½Ó°ï¿½Å¥ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
                 }
             );
 
-            //ÏÂÒ»¸öButtonµÄÎ»ÖÃµÈÓÚµ±Ç°¼õÈ¥ËûµÄ¸ß¶È
+            //ï¿½ï¿½Ò»ï¿½ï¿½Buttonï¿½ï¿½Î»ï¿½Ãµï¿½ï¿½Úµï¿½Ç°ï¿½ï¿½È¥ï¿½ï¿½ï¿½Ä¸ß¶ï¿½
             btnPos = btnPos - btnHeight;
         }
     }
     private void Click(string text)
     {
         text = text.Replace(" ","");
-        int sepID = text.IndexOf('¡·');
-        text = text.Substring(0, sepID + 1) + " " + text.Substring(sepID + 1, text.Length - sepID - 2);
-        inputText.text = text;
-        Debug.Log(text);
+        //int sepID = text.IndexOf('ï¿½ï¿½');
+        //text = text.Substring(0, sepID + 1) + " " + text.Substring(sepID + 1, text.Length - sepID - 2);
+        //inputText.text = text;
+        //Debug.Log(text);
     }
 
     public static void RemoveAllChildren(GameObject parent)

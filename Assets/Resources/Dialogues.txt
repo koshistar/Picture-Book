@@ -1,39 +1,57 @@
-PlaySong("Ocean's Theme")
+PlaySong("Sea of Dreams")
 
 CreateCharacter("tkc as TsuKiChya" -e false -i true)
 
 tkc.Move(0.25 0.5 -i true)
-
+PlayVoice("tk0")
 月亮 "好疼，我这是掉到哪来了。"
+StopVoice("tk0")
+PlayVoice("tk1")
 "好黑，好可怕，太阳，你在哪。"
+StopVoice("tk1")
+PlayVoice("tk2")
 "真是奇怪的感觉，仿佛自己不再是自己了。"
-"有谁在吗，我是月亮，我似乎被某个行星撞到了这里。"
-"这里是哪，我要离开这里，我要会天上去。"
+StopVoice("tk2")
+PlayVoice("tk3")
+"有谁在吗。"
+StopVoice("tk3")
+PlayVoice("tk4")
+"我是月亮，我似乎被某个行星撞到了这里。"
+StopVoice("tk4")
+PlayVoice("tk5")
+"这里是哪，我要离开这里，我要回天上去。"
+StopVoice("tk5")
 
 Narrator "一束淡蓝色的光逐渐靠近。"
 
 CreateCharacter("mk as MiKu" -e true -i true)
 
 mk.Move(0.5 0.5 -i true)
-
+PlayVoice("shi1")
 ??? "这里是魔法海洋。"
-
+StopVoice("shi1")
 mk.unhighlight()
-
+PlayVoice("tk6")
 月亮 "是谁，唉，等等，海洋，我可不会游泳啊。"
+StopVoice("tk6")
+PlayVoice("tk7")
 "呜哇，人类，人类行走在海洋里！我也行走在海洋里！"
-
+StopVoice("tk7")
 mk.highlight()
-
+PlayVoice("shi2")
 人类 "看来你是真的第一次来到这里呢，看来有有必要好好和你解释一下了。"
-
+StopVoice("shi2")
 mk.unhighlight()
 
+PlayVoice("tk8")
 月亮 "请务必！"
-
+StopVoice("tk8")
 mk.highlight()
 
+PlayVoice("shi3")
 人类 "首先，我并不是人类，就像我之前所说的，这里是魔法海洋。"
+StopVoice("shi3")
+PlayVoice("shi4")
 少女 "ֻ只是在这里的所有生物会变成人类的形状而已，当然也包括你。"
 
 Hidedb()
@@ -45,63 +63,91 @@ Hidedb()
 mk.unhighlight()
 tkc.highlight()
 
+StopVoice("shi4")
+PlayVoice("tk9")
 月亮 "真的耶，原来我也变成人形了。"
-
+StopVoice("tk9")
 tkc.unhighlight()
 mk.highlight()
-
+PlayVoice("shi5")
 少女 "当然，在这里的所有生物是能够自由呼吸和行走的。"
+StopVoice("shi5")
+PlayVoice("shi6")
 "我再奉劝你一句，在这里你最好不要到处宣称你的真实身份。"
+StopVoice("shi6")
+PlayVoice("shi7")
 "为了你好，不要问为什么，在你在海洋里的这段时间内，你将作为人类少女爱丽丝行动。"
+StopVoice("shi7")
 
 mk.unhighlight()
 tkc.highlight()
-
-爱丽丝 "了解。"
+StopVoice("shi7")
+PlayVoice("tk10")
+爱丽丝 "嗯嗯。"
+StopVoice("tk10")
+PlayVoice("tk11")
 "这些都无所谓，我只想知道我怎样才能回到天空。"
-
+StopVoice("tk11")
 tkc.unhighlight()
 mk.highlight()
-
+PlayVoice("shi8")
 少女 "虽然我和你一样，不能够像鱼群他们一样自由地在海洋中游动，不能够直接带你离开。"
+StopVoice("shi8")
+PlayVoice("shi9")
 "但是，我可以给你提供一个方案。"
+StopVoice("shi9")
 
 mk.unhighlight()
 tkc.highlight()
 
+PlayVoice("tk12")
 爱丽丝 "洗耳恭听。"
+StopVoice("tk12")
 
 tkc.unhighlight()
 mk.highlight()
 
+PlayVoice("shi10")
 少女 "你现在似乎不能够自己发光，这在黑暗的海洋里可吸引不到鱼群们的注意。"
-
+StopVoice("shi10")
 mk.unhighlight()
 tkc.highlight()
 
+PlayVoice("tk13")
 爱丽丝 "当然，我可是一直在依靠太阳的光的。"
+StopVoice("tk13")
+PlayVoice("tk14")
 "那你的意思是有办法让我自己发光，然后吸引鱼群们的注意，请求他们带我离开吗。"
+StopVoice("tk14")
 
 tkc.unhighlight()
 mk.highlight()
 
+PlayVoice("shi11")
 少女 "虽然不至于让你自己过发光，也不至于让你去求情。"
-"我可以让你通过创作来吸引鱼群们的注意，他们对于各种作品都十分痴迷。"
-"你只要让他们欣赏作品，想必也会欣然带你向上游去吧。"
+StopVoice("shi11")
+PlayVoice("shi12")
+"我可以让你通过创作来获取不同的颜色，通过多种颜色可以合成光源。"
+StopVoice("shi12")
+PlayVoice("shi13")
+"这里的鱼群都非常渴望光源，只要知道你有产生光的能力的话，想必也会欣然带你向上游去吧。"
 
 mk.unhighlight()
 tkc.highlight()
-
+StopVoice("shi13")
+PlayVoice("tk15")
 爱丽丝 "哦！第一次听说。"
 
 tkc.unhighlight()
 mk.highlight()
-
+StopVoice("tk15")
+PlayVoice("shi14")
 少女 "为了尽早进行创作，不如现在就去寻找魔法书，魔法竖琴，魔法海螺吧。"
 
 mk.unhighlight()
 tkc.highlight()
-
+StopVoice("shi14")
+PlayVoice("tk16")
 爱丽丝 "哦！全是新东西，真是让人热血沸腾呢。"
 tkc.Move(0.7 0.5 -spd 0.5)
 

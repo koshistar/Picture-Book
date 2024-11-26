@@ -68,6 +68,7 @@ namespace COMMANDS
         {
             int num = Convert.ToInt32(data);
             SceneManager.LoadScene(num);
+            CurrentScene.currentScene++;
         }
     }
 }

@@ -1,0 +1,93 @@
+PlaySong("Sea of Dreams" -l true)
+CreateCharacter("tkc as TsuKiChya" -e true -i true)
+CreateCharacter("ly as MiKu" -e true -i true)
+tkc.Move(0.25 0.5 -i true)
+ly.Move(0.75 0.5 -i true)
+ly.unhighlight()
+PlayVoice("tk17")
+爱丽丝 "唉，怎么这么累，原来创作还要考虑这么多。"
+StopVoice("tk17")
+PlayVoice("shi15")
+tkc.unhighlight()
+ly.highlight()
+少女 "这种程度就开始抱怨，你还真是怠惰呢。好在现在收集了三份颜色，可以合成光源来吸引鱼群了。"
+ly.unhighlight()
+
+Narrator "靠近'工作台'，按下e键进行合成。"
+
+StopVoice("shi15")
+PlayVoice("shi16")
+ly.highlight()
+少女 "好了，现在有了光源，试着来吸引鱼群吧。"
+StopVoice("shi16")
+PlayVoice("tk18")
+ly.unhighlight()
+tkc.highlight()
+爱丽丝 "哦！"
+tkc.unhighlight()
+
+Narrator "一段时间后。"
+
+StopVoice("tk18")
+深海鱼1 "你们是谁，竟然能够在这么黑暗的海洋里产生光。"
+深海鱼2 "哇，终于见到光了，你们能产生更大更亮的光吗，照亮整片海洋那种。"
+深海鱼3 "真的吗，你们是这片海洋的救世主吗。"
+
+Narrator "鱼群们嘈杂的讨论声不绝于耳。"
+
+PlayVoice("tk19")
+tkc.highlight()
+爱丽丝 "哎嘿嘿，没那么伟大啦。"
+tkc.unhighlight()
+ly.highlight()
+StopVoice("tk19")
+PlayVoice("shi17")
+少女 "请大家安静一下，旁边这位是从海洋外界来的少女爱丽丝，她具有合成光源的能力。"
+StopVoice("shi17")
+PlayVoice("shi18")
+"但是，要想得到更优质的光源，她需要去深度更低的海域才行。"
+StopVoice("shi18")
+PlayVoice("shi19")
+"希望大家能出一份力，将她送到高处去吧。"
+StopVoice("shi19")
+PlayVoice("tk19")
+tkc.highlight()
+爱丽丝 "对了，请大家帮帮我吧，我需要回到天空去。"
+tkc.unhighlight()
+深海鱼1 "天空！您是要回到天空去吗！莫非你真是从天空来的救世主？！"
+"当然，只要能帮到您的，我们一定会帮忙的。"
+
+Narrator "鱼群们二话不说准备驮着爱丽丝和深海少女向上游去。"
+
+tkc.Hide()
+ly.Hide()
+StopVoice("tk19")
+PlayVoice("shi20")
+少女 "唉，我也要去吗。"
+StopVoice("shi20")
+PlayVoice("tk20")
+爱丽丝 "当然，你也是救世主哦。"
+
+Narrator "爱丽丝拉上深海少女的手走上鱼群们的背上。"
+
+StopSong("Sea of Dream")
+PlaySong("Bajo las Olas")
+StopVoice("tk20")
+PlayVoice("tk21")
+爱丽丝 "话说，我们都相处这么久了，我还对你什么都不了解呢，我该怎么称呼你。"
+StopVoice("tk21")
+PlayVoice("tk22")
+"妈妈？"
+StopVoice("tk22")
+PlayVoice("shi21")
+少女 "怎么样都好啦，反正我们迟早会分开的。"
+StopVoice("shi21")
+PlayVoice("tk23")
+爱丽丝 "唉，别说这么伤感的话嘛。"
+StopVoice("tk23")
+PlayVoice("tk24")
+"那我就叫你 流萤 小姐吧。"
+
+HideUI(-s 0.5)
+StopSong("Bajo las Olas")
+nextScene(3)

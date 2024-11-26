@@ -1,0 +1,59 @@
+Narrator "到达浅海层。"
+PlaySong("Mysterious Echo1" -l true)
+CreateCharacter("tkc as TsuKiChya" -e true -i true)
+CreateCharacter("ly as MiKu" -e true -i true)
+tkc.Move(0.25 0.5 -i true)
+ly.Move(0.75 0.5 -i true)
+tkc.highlight()
+ly.unhighlight()
+PlayVoice("tk53")
+爱丽丝 "呐，流萤，你其实全都知道的吧。"
+tkc.unhighlight()
+ly.highlight()
+StopVoice("tk53")
+PlayVoice("shi36")
+流萤 "你指什么。"
+ly.unhighlight()
+tkc.highlight()
+StopVoice("shi36")
+PlayVoice("tk54")
+爱丽丝 "因为我的失职给这里的居民带来困扰这件事。"
+StopVoice("tk54")
+PlayVoice("tk55")
+"想必这里知情的居民都十分憎恨我吧，所以你才让我隐藏身份。"
+StopVoice("tk55")
+PlayVoice("tk56")
+"而你却知晓我的身份，还想要帮助我，所以我对你的真实身份十分好奇。"
+StopVoice("tk56")
+PlayVoice("tk57")
+"可以告诉我吗，你是谁？"
+tkc.unhighlight()
+ly.highlight()
+StopVoice("tk57")
+流萤 "……"
+ly.unhighlight()
+tkc.highlight()
+PlayVoice("tk58")
+爱丽丝 "不回答也罢。"
+StopVoice("tk58")
+PlayVoice("tk59")
+"我会自己回到天空，然后负起我的责任。"
+StopVoice("tk59")
+PlayVoice("tk60")
+"毕竟到了晚上，可能还有其他地方的居民正在被困扰呢。"
+StopVoice("tk61")
+PlayVoice("tk62")
+"你一直被迫跟着我也很难受吧，我们就此别过吧，不然我又要想着依赖你了。"
+StopVoice("tk62")
+PlayVoice("tk63")
+"感谢你一直以来的指引，再见。"
+StopVoice("tk63")
+tkc.unhighlight()
+ly.highlight()
+流萤 "……"
+ly.Hide()
+tkc.Hide()
+
+HideUI(-s 0.5)
+StopSong("Mysterious Echo1")
+nextScene(8)

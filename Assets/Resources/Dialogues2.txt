@@ -1,0 +1,67 @@
+PlaySong("Sea of Dreams1" -l true)
+
+深海鱼 "我们也就只能把你们送到这里了，再往上就不是我们能生存的区域了。"
+
+CreateCharacter("ly as MiKu" -e true -i true)
+ly.Move(0.5 0.5 -i true)
+PlayVoice("shi22")
+ly.highlight()
+流萤 "能送到这里已经非常感谢了，之后我们再向别的鱼群求助吧。"
+ly.Move(0.75 0.5 -i false)
+CreateCharacter("tkc as TsuKiChya" -e true -i true)
+tkc.Move(0.25 0.5 -i true)
+StopVoice("shi22")
+PlayVoice("tk25")
+ly.unhighlight()
+tkc.highlight()
+爱丽丝 "总之就是非常感谢。"
+StopVoice("tk25")
+PlayVoice("shi23")
+tkc.unhighlight()
+ly.highlight()
+流萤 "事不宜迟，我们赶紧按照之前的步骤收集颜色吧。"
+ly.unhighlight()
+tkc.highlight()
+StopVoice("shi23")
+PlayVoice("tk26")
+爱丽丝 "不，不。"
+tkc.unhighlight()
+ly.highlight()
+StopVoice("tk26")
+PlayVoice("shi24")
+流萤 "你是有什么怨言吗。"
+ly.unhighlight()
+tkc.highlight()
+StopVoice("shi24")
+PlayVoice("tk27")
+爱丽丝 "这创作不全都是我在做吗。"
+StopVoice("tk27")
+PlayVoice("tk28")
+"小流萤你都能教我做，你肯定也能做吧。"
+StopVoice("tk28")
+PlayVoice("tk29")
+"我已经累了，这次让给你来做不就好了。"
+tkc.unhighlight()
+ly.highlight()
+StopVoice("tk29")
+PlayVoice("shi25")
+流萤 "你还是一点也没变呢。"
+ly.unhighlight()
+tkc.highlight()
+StopVoice("shi25")
+PlayVoice("tk30")
+爱丽丝 "唉，小流萤你之前就认识我吗。"
+tkc.unhighlight()
+ly.highlight()
+StopVoice("tk30")
+PlayVoice("shi26")
+流萤 "不，没什么。总之要回到天空的是你，我是不会帮你的。"
+ly.unhighlight()
+tkc.highlight()
+StopVoice("shi26")
+PlayVoice("tk31")
+爱丽丝 "嘁，真冷淡啊，还以为我们已经好到可以随便亲亲的地步了。"
+
+HideUI(-s 0.5)
+StopSong("Sea of Dreams1")
+nextScene(4)

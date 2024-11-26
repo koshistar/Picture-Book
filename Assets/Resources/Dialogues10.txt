@@ -1,0 +1,95 @@
+PlaySong("Deep sea Girl" -l true)
+CreateCharacter("tkc as TsuKiChya" -e true -i true)
+tkc.Move(0.5 0.5 -i true)
+tkc.highlight()
+PlayVoice("tk67")
+爱丽丝 "我要向这里的所以鱼道歉，我要反省我自己。"
+StopVoice("tk67")
+tkc.Hide()
+
+Narrator "于是。"
+"爱丽丝用上收集来的所有颜色，在晚上发出来前所未有的光，照亮了整片海洋。"
+"她拿起海螺，向海洋中所有的鱼呼唤。"
+"鱼群聚集到了爱丽丝周围。"
+
+tkc.Show()
+PlayVoice("tk68")
+爱丽丝 "我是爱丽丝，将要成为这片海洋救世主的人。我向所有帮助过我的鱼们致以感谢。"
+StopVoice("tk68")
+PlayVoice("tk69")
+"这片光源就是我的谢礼，以及一直以来的歉礼。"
+StopVoice("tk69")
+PlayVoice("tk70")
+"我的真实身份是天空中的月亮。"
+StopVoice("tk70")
+PlayVoice("tk71")
+"也就是本应该晚上给大家提供光照的月亮。"
+StopVoice("tk71")
+PlayVoice("tk72")
+"我长久以来习惯了依赖太阳，忽视了自己的本职工作。"
+StopVoice("tk72")
+PlayVoice("tk73")
+"我从未想到会给大家带来这么大的困扰，真的非常抱歉。"
+StopVoice("tk73")
+PlayVoice("tk74")
+"最后，我要感谢一直陪伴在我身边的星星，无论是在天空，还是坠落到海洋之后。"
+StopVoice("tk74")
+PlayVoice("tk75")
+"我想要和你一起回到天空，分别做好各自的工作。"
+StopVoice("tk75")
+tkc.Hide()
+Narrator "大鱼承载着流萤，穿过鱼群的包围圈，来到爱丽丝旁边。"
+CreateCharacter("ly as MiKu" -e true -i true)
+ly.Move(0.5 0.5 -i true)
+PlayVoice("shi37")
+流萤 "你还真是自私呢，不想要我的时候说一声再见就离开了，现在又想要把我找回来了。"
+StopVoice("shi37")
+ly.Move(0.75 0.5 -i false)
+tkc.Move(0.25 0.5 -i true)
+tkc.Show()
+ly.unhighlight()
+tkc.highlight()
+PlayVoice("tk76")
+爱丽丝 "抱歉。"
+StopVoice("tk76")
+tkc.unhighlight()
+ly.highlight()
+PlayVoice("shi38")
+流萤 "还有，明明在天空的时候对我爱答不理，我一变成人形就一个劲地缠着我。"
+ly.unhighlight()
+tkc.highlight()
+StopVoice("shi38")
+PlayVoice("tk76")
+爱丽丝 "抱歉。"
+tkc.unhighlight()
+ly.highlight()
+StopVoice("tk76")
+PlayVoice("shi39")
+流萤 "唉，算了，被你欺负也不是一天两天了。"
+StopVoice("shi39")
+PlayVoice("shi40")
+StopSong("Deep sea Girl")
+PlaySong("Bajo las Olas")
+"比起这个……"
+StopVoice("shi40")
+ly.unhighlight()
+
+大鱼 "我能将你们送回天空。"
+"我原本因为缺少魔法，变成了小不点，多亏了你的光，让我重新回到了现在的身形。"
+"从你的光里，我能感受到你想要改变的决心，过去的就让它过去吧，希望你以后都能让我保持这幅身躯。"
+"恢复回来的第一跃，就当是我给你们的谢礼吧。"
+
+ly.highlight()
+PlayVoice("shi41")
+流萤 "就是这样，你准备好了吗。"
+StopVoice("shi41")
+ly.unhighlight()
+tkc.highlight()
+PlayVoice("tk77")
+爱丽丝 "你明明什么都知道。"
+StopVoice("tk77")
+tkc.Hide()
+ly.Hide()
+Narrator "大鱼承载着两人，跃出水平面，她们分别变回了月亮和星星。"
+"继续往上腾飞，月亮和星星重新挂在了天上，鱼群也纷纷从水平面探出头欢呼。"
+"从此之后，夜晚的海洋不再是一片寂静。"

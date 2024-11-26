@@ -1,0 +1,77 @@
+PlaySong("Mysterious Echo" -l true)
+CreateCharacter("tkc as TsuKiChya" -e true -i true)
+CreateCharacter("ly as MiKu" -e false -i true)
+tkc.Move(0.5 0.5 -i true)
+ly.Move(0.75 0.5 -i true)
+tkc.highlight()
+ly.unhighlight()
+PlayVoice("tk47")
+爱丽丝 "光啊。"
+tkc.Hide()
+
+中海鱼1 "多么耀眼的光啊，我感受到了其中蕴含的丰富的魔法。"
+中海鱼2 "你们是这片海域的救世主吗。"
+中海鱼3 "要是到了晚上能出现这种光，那该多好啊。"
+
+Narrator "鱼群们嘈杂的讨论声不绝于耳。"
+
+tkc.Move(0.25 0.5 -i true)
+ly.Show()
+tkc.Show()
+tkc.unhighlight()
+ly.highlight()
+PlayVoice("shi34")
+流萤 "请大家安静一下。"
+StopVoice("shi34")
+PlayVoice("shi35")
+"我旁边这位是从外界误入了海洋的少女爱丽丝，她制作光源把大家聚集过来是想要……"
+ly.unhighlight()
+tkc.highlight()
+StopVoice("shi35")
+PlayVoice("tk48")
+
+StopSong("Mysterious Echo")
+PlaySong("Deep Sea Girl")
+爱丽丝 "等等，流萤。"
+StopVoice("tk48")
+PlayVoice("tk49")
+"大家能够给我详细说说这片海域的情况吗。"
+StopVoice("tk49")
+PlayVoice("tk50")
+"为什么光会蕴含魔法，为什么我会被叫做救世主，这片海域到了晚上会有什么问题。"
+StopVoice("tk50")
+tkc.Hide()
+ly.Hide()
+
+中海鱼1 "您不知道吗，这片海洋的能量全来源于光。"
+"光能够在这里释放出魔法。"
+"我们作为这片海洋的居民，一切生命活动都需要消耗魔法。"
+中海鱼2 "现在在白天倒还好，一到晚上，我们的魔法来源就变得极其稀缺了。"
+中海鱼3 "据我所知，很久以前到了晚上海洋里也是有光的。"
+"似乎是来自一个叫做月亮的行星。"
+中海鱼2 "对，这个我也听说过，但是不知道从什么时候开始，月亮的光越来越暗了。"
+"现在已经完全见不到光了，晚上我们几乎都没法活动了。"
+
+
+流萤 "……"
+爱丽丝 "……"
+中海鱼1 "救世主？"
+
+Narrator "流萤握住了爱丽丝的手，"
+
+tkc.Show()
+ly.Show()
+PlayVoice("tk51")
+爱丽丝 "那个，大家，能够把我送到海平面吗。"
+StopVoice("tk51")
+PlayVoice("tk52")
+"我保证，我以后会在晚上给海洋带来比现在更加持久的光的。"
+StopVoice("tk52")
+中海鱼1 "真的吗，乐意效劳。"
+流萤 "……"
+
+tkc.Hide()
+ly.Hide()
+HideUI(-s 0.1)
+StopSong("Deep Sea Girl")
+nextScene(7)

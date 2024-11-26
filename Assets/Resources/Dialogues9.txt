@@ -1,0 +1,10 @@
+CreateCharacter("tkc as TsuKiChya" -e true -i false)
+tkc.Move(0.5 0.5 -i true)
+PlayVoice("tk66")
+爱丽丝 "曾经，我见过那种跃上天空来的大鱼，我需要拜托他。"
+StopVoice("tk66")
+"……"
+tkc.Hide()
+
+HideUI(-s 0.5)
+nextScene(11)
