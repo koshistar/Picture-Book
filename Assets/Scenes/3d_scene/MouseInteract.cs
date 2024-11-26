@@ -27,21 +27,21 @@ public class MouseInteract : MonoBehaviour
 			yield return null;
 		}
 
-		// È·±£ÔÚĞ§¹û½áÊøÊ±»Ö¸´Ô­Ê¼´óĞ¡
+		// ç¡®ä¿åœ¨æ•ˆæœç»“æŸæ—¶æ¢å¤åŸå§‹å¤§å°
 		parentObject.transform.localScale = originalScale;
 	}
 
 	private void Update()
 	{
-		//ÓÃÉäÏß¼ì²âÅĞ¶ÏÊÇ·ñµ¥»÷ÎïÌå
-		//µ¥»÷Êó±ê×ó¼ü
+		//ç”¨å°„çº¿æ£€æµ‹åˆ¤æ–­æ˜¯å¦å•å‡»ç‰©ä½“
+		//å•å‡»é¼ æ ‡å·¦é”®
 		if (Input.GetMouseButtonDown(0))
 		{
-			//»ñÈ¡Êó±êÖ¸ÕëÎ»ÖÃµÄÉäÏß
+			//è·å–é¼ æ ‡æŒ‡é’ˆä½ç½®çš„å°„çº¿
 			Ray ray=Camera.main.ScreenPointToRay(Input.mousePosition);
-			//Åö×²ĞÅÏ¢
+			//ç¢°æ’ä¿¡æ¯
 			RaycastHit hit;
-			//Èç¹û·¢ÉúÅö×²
+			//å¦‚æœå‘ç”Ÿç¢°æ’
 			if(Physics.Raycast(ray, out hit))
 			{
 				Debug.Log("yes,it hits");
@@ -53,13 +53,13 @@ public class MouseInteract : MonoBehaviour
 					GameObject parentObject = parentTransform.gameObject;
 					Debug.Log("Parent object: " + parentObject.name);
 
-					//ÊµÏÖµã»÷ÎïÌåºó£¬ÎïÌåµÄ´óĞ¡±ä»¯
+					//å®ç°ç‚¹å‡»ç‰©ä½“åï¼Œç‰©ä½“çš„å¤§å°å˜åŒ–
 					StartCoroutine(ScaleEffect(parentObject));
 
 
 
 					/*
-					 ÔÚÕâÀïÌí¼Ó¸ü»»³¡¾°µÄ´úÂë
+					 åœ¨è¿™é‡Œæ·»åŠ æ›´æ¢åœºæ™¯çš„ä»£ç 
 					 */
 
 
