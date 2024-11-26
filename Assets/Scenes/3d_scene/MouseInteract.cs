@@ -10,7 +10,7 @@ public class MouseInteract : MonoBehaviour
 	public float curveDuration;
 	private Vector3 originalScale= Vector3.one;
 
-
+	public AudioSource audio;
 
 	IEnumerator ScaleEffect(GameObject parentObject)
 	{
@@ -45,6 +45,7 @@ public class MouseInteract : MonoBehaviour
 			if(Physics.Raycast(ray, out hit))
 			{
 				Debug.Log("yes,it hits");
+				audio.Play();
 
 				Transform parentTransform=hit.collider.transform.parent;
 				if (parentTransform != null)
