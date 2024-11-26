@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,7 @@ public class Program : MonoBehaviour
     public RawImage showImage;
     public InputField inputText;
     public Button SendBtn;
-    private string APIexePath = Application.streamingAssetsPath + "/../qianfanAPI/qianfan_paint.exe";
+    private string APIexePath = Application.dataPath + "/qianfanAPI/qianfan_paint.exe";
     private string imgPath;
     private string imageStr;
 
@@ -22,8 +23,13 @@ public class Program : MonoBehaviour
     {
         imgPath = "";
         operate();
-        imgPath = Application.streamingAssetsPath + "/img/" + inputText.text + ".png";
+        imgPath = Application.dataPath + "/AI/imgs/" + inputText.text + ".png";
+        imgPath = imgPath.Replace(" ", "/");
         imageStr = SetImageToString(imgPath);
+
+        Color color = showImage.color;
+        color.a = 1;
+        showImage.color = color;
         showImage.texture = GetTextureByString(imageStr);
     }
 
@@ -45,7 +51,9 @@ public class Program : MonoBehaviour
             string error = process.StandardError.ReadToEnd();
 
             process.WaitForExit();
+            UnityEngine.Debug.LogFormat("Painting finished, output:{0}", output);
         }
+
     }
     /// <summary>
     /// 将图片转化为字符串

@@ -8,7 +8,7 @@ using TMPro;
 using UnityEngine.EventSystems;
 using System.Linq;
 using UnityEngine.UI;
-
+using System.IO;
 
 
 public class DeepSeekChat : MonoBehaviour
@@ -22,6 +22,8 @@ public class DeepSeekChat : MonoBehaviour
     private string apiKey = "sk-195fb14227474c3183a972ba9710be31";
     private string apiUrl = "https://api.deepseek.com/chat/completions";
     public KeyWords k1,k2,k3;
+    private string path;
+    private string colorHex;
     Stack<KeyWords> st = new Stack<KeyWords>();
 
     // Unity UI 元素
@@ -32,6 +34,8 @@ public class DeepSeekChat : MonoBehaviour
     void Start()
     {
         // 初始化系统消息
+        path = Application.dataPath + "/AI/texts";
+        Debug.Log("datapath:" + path);
         k1.num = k2.num = k3.num = 0;
         k1.s = k2.s = k3.s = "";
         messages.Add(new Dictionary<string, string> { { "role", "system" }, { "content", "You are a helpful assistant." } });
@@ -47,7 +51,7 @@ public class DeepSeekChat : MonoBehaviour
         userInputField.text += "创作一个绘本。";
 
         string gradientText = userInputField.text;
-        string colorHex = "";
+        colorHex = "";
         int p,t=3;
         while (t>0)
         {
@@ -59,7 +63,8 @@ public class DeepSeekChat : MonoBehaviour
         if (colorHex == "FFFF00") colorHex = "FFD700";
         if (colorHex == "00FF00") colorHex = "32B432";
         if (colorHex == "FFFFFF") colorHex = "000000";
-        userInputField.text = $"<color=#{colorHex}FF>"+gradientText+"</color>";
+        colorHex += "FF";
+        userInputField.text = $"<color=#{colorHex}>"+gradientText+"</color>";
     }
     public void KeyWordButton11Clicked()
     {
@@ -134,7 +139,7 @@ public class DeepSeekChat : MonoBehaviour
         chatOutputText.text += "Me: \n" + userInputField.text;
         k1.num = k2.num = k3.num = 0;
         k1.s = k2.s = k3.s = "";
-        string userMessage = userInputField.text+"严格要求只回复此绘本的剧本，每页绘本的剧本用一句35个字左右的话描述，每页的剧情要有关联，每句话开头用阿拉伯数字标号，共十页，背景为魔法海洋，面向中国的小学二年级学生。";
+        string userMessage = userInputField.text+ "严格要求只回复此绘本的标题和剧本，输出第一行为标题，每页绘本的剧本用一句35个字左右的话描述，每页的剧情要有关联，每句话开头用阿拉伯数字标号，共十页，背景为魔法海洋，面向中国的小学二年级学生。";
         userInputField.text = "";
 
         // 添加用户消息到对话历史
@@ -177,8 +182,26 @@ public class DeepSeekChat : MonoBehaviour
 
             // 显示响应
             chatOutputText.text = pre_chatOutputText;
-            chatOutputText.text += "\nAI: \n" + botMessage+"\n";
+            chatOutputText.text += "\nAI: \n" + $"<color=#{colorHex}>" + botMessage + "</color>" + "\n";
 
+            string title = "";
+            for (int i = 0; i < botMessage.Length; i++)
+                if (botMessage[i] != '\n')
+                {
+                    if (botMessage[i] != '*') title += botMessage[i];
+                }
+                else break;
+            string Path;
+            Path = path + "/" + title + ".txt";
+            if (!File.Exists(Path))
+            {
+                Debug.Log("datapath:" + Path);
+                FileStream fileStream = new FileStream(Path, FileMode.OpenOrCreate);
+                StreamWriter sw = new StreamWriter(fileStream, Encoding.UTF8);
+                sw.WriteLine(botMessage+"\n"+colorHex);
+                sw.Close();
+                fileStream.Close();
+            }
             // 添加 AI 消息到对话历史
             messages.Add(new Dictionary<string, string> { { "role", "assistant" }, { "content", botMessage } });
         }
@@ -204,5 +227,10 @@ public class DeepSeekChat : MonoBehaviour
     public class Message
     {
         public string content;
+    }
+
+    void OnDisable()
+    {
+
     }
 }
