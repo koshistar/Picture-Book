@@ -13,7 +13,7 @@ ly.highlight()
 少女 "这种程度就开始抱怨，你还真是怠惰呢。好在现在收集了三份颜色，可以合成光源来吸引鱼群了。"
 ly.unhighlight()
 
-Narrator "靠近'工作台'，按下e键进行合成。"
+Narrator "获得光源。"
 
 StopVoice("shi15")
 PlayVoice("shi16")
@@ -90,4 +90,4 @@ PlayVoice("tk24")
 
 HideUI(-s 0.5)
 StopSong("Bajo las Olas")
-nextScene(3)
+nextScene(12)

@@ -53,7 +53,7 @@ public class findTexts : MonoBehaviour
             GameObject TextBtnClone = Instantiate(TextBtn);
             TextBtnClone.transform.SetParent(TxtList.transform);
             TextBtnClone.GetComponent<Outline>().effectColor = color;
-            TextBtnClone.transform.localScale = new Vector3(1, 1, 1);    //ÓÉÓÚ¿ËÂ¡µÄButtonËõ·Å±»ÉèÖÃÎª0£¬ËùÒÔÕâÀïÒªÉèÖÃÎª1
+            TextBtnClone.transform.localScale = new Vector3(1, 1, 1);    //ï¿½ï¿½ï¿½Ú¿ï¿½Â¡ï¿½ï¿½Buttonï¿½ï¿½ï¿½Å±ï¿½ï¿½ï¿½ï¿½ï¿½Îª0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½Îª1
             TextBtnClone.transform.localPosition = new Vector3(0, btnPos, 0);
             var btn_rectTransform = TextBtnClone.transform.GetComponent<RectTransform>();
             btn_rectTransform.sizeDelta = new Vector2(btnLength, btnHeight);
@@ -119,9 +119,9 @@ public class findTexts : MonoBehaviour
         string[] textTxt = File.ReadAllLines(txtDirPath + "/" + txtName + ".txt");
 
         GameObject TxtTxt = GameObject.Find("TxtTxt");
-        int btnPos = 0; //µÚÒ»¸öButtonµÄYÖáÎ»ÖÃ
-        int btnHeight = 80; //ButtonµÄ¸ß¶È
-        int btnCount = textTxt.Length; //ButtonµÄÊýÁ¿
+        int btnPos = 0; //ï¿½ï¿½Ò»ï¿½ï¿½Buttonï¿½ï¿½Yï¿½ï¿½Î»ï¿½ï¿½
+        int btnHeight = 80; //Buttonï¿½Ä¸ß¶ï¿½
+        int btnCount = textTxt.Length; //Buttonï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
         GameObject TxtTxtList = GameObject.Find("TxtTxtList");
         var rectTransform = TxtTxtList.transform.GetComponent<RectTransform>();
@@ -169,10 +169,10 @@ public class findTexts : MonoBehaviour
     private void Click(string text)
     {
         text = text.Replace(" ","");
-        //int sepID = text.IndexOf('ï¿½ï¿½');
-        //text = text.Substring(0, sepID + 1) + " " + text.Substring(sepID + 1, text.Length - sepID - 2);
-        //inputText.text = text;
-        //Debug.Log(text);
+        int sepID = text.IndexOf('ã€‹');
+        text = text.Substring(0, sepID + 1) + " " + text.Substring(sepID + 1, text.Length - sepID - 2);
+        inputText.text = text;
+        Debug.Log(text);
     }
 
     public static void RemoveAllChildren(GameObject parent)

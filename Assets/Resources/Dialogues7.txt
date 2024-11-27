@@ -7,4 +7,4 @@ StopVoice("tk64")
 tkc.Hide()
 
 HideUI(-s 0.5)
-nextScene(9)
+nextScene(12)

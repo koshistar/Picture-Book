@@ -155,7 +155,7 @@ wait(0.5)
 mk.Hide()
 tkc.Hide()
 
-Narrator "别以为我没告诉你wsad移动，e键进行互动。"
+Narrator "别以为我没告诉你点击物品进入相应的场景。"
 
 [wait]HideUI(-s 0.5)
-nextScene(2)
+nextScene(12)

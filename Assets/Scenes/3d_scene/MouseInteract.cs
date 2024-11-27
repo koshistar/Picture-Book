@@ -61,8 +61,21 @@ public class MouseInteract : MonoBehaviour
 					/*
 					 在这里添加更换场景的代码
 					 */
-					
 
+					if (parentObject.name == "魔法书")
+					{
+						SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+					}
+
+					if (parentObject.name == "海螺")
+					{
+						SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+					}
+
+					if (parentObject.name == "竖琴")
+					{
+						SceneManager.LoadScene(CurrentScene.currentScene);
+					}
 				}
 				else
 				{

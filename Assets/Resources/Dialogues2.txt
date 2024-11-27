@@ -64,4 +64,4 @@ PlayVoice("tk31")
 
 HideUI(-s 0.5)
 StopSong("Sea of Dreams1")
-nextScene(4)
+nextScene(12)

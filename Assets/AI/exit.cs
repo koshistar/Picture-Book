@@ -23,7 +23,7 @@ public class exit : MonoBehaviour
     }
     public void BackScene()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(12);
     }
     public void Set()
     {

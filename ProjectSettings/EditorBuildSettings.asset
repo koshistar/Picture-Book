@@ -44,13 +44,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/visualScene/TestScene 10.unity
     guid: e6b896eb09c473e47ba0e8fa51a719b1
+  - enabled: 1
+    path: Assets/Scenes/3d_scene.unity
+    guid: c5f5256c70691e847bebbc4f68aa5e5c
+  - enabled: 1
+    path: Assets/AI/AI-text.unity
+    guid: 971a7a7037fd5444c99a69ac5978b924
+  - enabled: 1
+    path: Assets/AI/AI-paint.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/HappyEnding.unity
+    guid: 1821042f5580f38439c7b1e8ae727c99
   - enabled: 0
     path: Assets/Scenes/new scene/New Scene.unity
     guid: 0d8fad63d1c562d4a9d26146caa77c0f
-  - enabled: 0
-    path: Assets/AI/AI-text.unity
-    guid: 971a7a7037fd5444c99a69ac5978b924
-  - enabled: 0
-    path: Assets/AI/AI-paint.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}

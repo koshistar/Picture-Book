@@ -95,4 +95,4 @@ ly.Hide()
 
 HideUI(-s 0.5)
 StopSong("Mysterious Echo")
-nextScene(6)
+nextScene(12)
