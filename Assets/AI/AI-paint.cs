@@ -23,7 +23,7 @@ public class Program : MonoBehaviour
     {
         imgPath = "";
         operate();
-        imgPath = Application.dataPath + "/AI/imgs/" + inputText.text + ".png";
+        imgPath = Application.streamingAssetsPath + "/img/" + inputText.text + ".png";
         imgPath = imgPath.Replace(" ", "/");
         imageStr = SetImageToString(imgPath);
 

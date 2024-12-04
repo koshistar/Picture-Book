@@ -13,7 +13,7 @@ public class findTexts : MonoBehaviour
     public GameObject TextBtn;
     public InputField inputText;
     private List<string> textFiles = new List<string> ();
-    private string txtDirPath = Application.dataPath + "/AI/texts";
+    private string txtDirPath = Application.streamingAssetsPath + "/text";
 
     void Start()
     {
