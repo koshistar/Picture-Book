@@ -34,7 +34,7 @@ public class DeepSeekChat : MonoBehaviour
     void Start()
     {
         // 初始化系统消息
-        path = Application.dataPath + "/AI/texts";
+        path = Application.streamingAssetsPath+"/text";
         Debug.Log("datapath:" + path);
         k1.num = k2.num = k3.num = 0;
         k1.s = k2.s = k3.s = "";
@@ -48,7 +48,7 @@ public class DeepSeekChat : MonoBehaviour
         if (k1.num > 0) userInputField.text += k1.s + "为主角";
         if (k2.num > 0) userInputField.text += "，以" + k2.s + "为主角的性格";
         if (k3.num > 0) userInputField.text += "，以" + k3.s + "为主题";
-        userInputField.text += "创作一个绘本。";
+        userInputField.text += "的绘本。";
 
         string gradientText = userInputField.text;
         colorHex = "";
