@@ -18,7 +18,7 @@ public class DeepSeekChat : MonoBehaviour
         public int num;
         public string s;
     }
-    // Ìæ»»ÎªÄãµÄ DeepSeek API key
+    // ï¿½æ»»Îªï¿½ï¿½ï¿½ DeepSeek API key
     private string apiKey = "sk-195fb14227474c3183a972ba9710be31";
     private string apiUrl = "https://api.deepseek.com/chat/completions";
     public KeyWords k1,k2,k3;
@@ -26,14 +26,14 @@ public class DeepSeekChat : MonoBehaviour
     private string colorHex;
     Stack<KeyWords> st = new Stack<KeyWords>();
 
-    // Unity UI ÔªËØ
+    // Unity UI Ôªï¿½ï¿½
     public TMP_InputField userInputField;
     public TextMeshProUGUI chatOutputText;
-    // ÓÃÓÚ´æ´¢¶Ô»°ÀúÊ·
+    // ï¿½ï¿½ï¿½Ú´æ´¢ï¿½Ô»ï¿½ï¿½ï¿½Ê·
     private List<Dictionary<string, string>> messages = new List<Dictionary<string, string>>();
     void Start()
     {
-        // ³õÊ¼»¯ÏµÍ³ÏûÏ¢
+        // ï¿½ï¿½Ê¼ï¿½ï¿½ÏµÍ³ï¿½ï¿½Ï¢
         path = Application.streamingAssetsPath+"/text";
         Debug.Log("datapath:" + path);
         k1.num = k2.num = k3.num = 0;
@@ -44,11 +44,11 @@ public class DeepSeekChat : MonoBehaviour
     public void updatekeywords()
     {
         int sum = k1.num + k2.num + k3.num;
-        userInputField.text = "Çë´´×÷Ò»¸ö";
-        if (k1.num > 0) userInputField.text += k1.s + "ÎªÖ÷½Ç";
-        if (k2.num > 0) userInputField.text += "£¬ÒÔ" + k2.s + "ÎªÖ÷½ÇµÄÐÔ¸ñ";
-        if (k3.num > 0) userInputField.text += "£¬ÒÔ" + k3.s + "ÎªÖ÷Ìâ";
-        userInputField.text += "µÄ»æ±¾¡£";
+        userInputField.text = "ï¿½ë´´ï¿½ï¿½Ò»ï¿½ï¿½";
+        if (k1.num > 0) userInputField.text += k1.s + "Îªï¿½ï¿½ï¿½ï¿½";
+        if (k2.num > 0) userInputField.text += "ï¿½ï¿½ï¿½ï¿½" + k2.s + "Îªï¿½ï¿½ï¿½Çµï¿½ï¿½Ô¸ï¿½";
+        if (k3.num > 0) userInputField.text += "ï¿½ï¿½ï¿½ï¿½" + k3.s + "Îªï¿½ï¿½ï¿½ï¿½";
+        userInputField.text += "ï¿½Ä»æ±¾ï¿½ï¿½";
 
         string gradientText = userInputField.text;
         colorHex = "";
@@ -139,21 +139,21 @@ public class DeepSeekChat : MonoBehaviour
         chatOutputText.text += "Me: \n" + userInputField.text;
         k1.num = k2.num = k3.num = 0;
         k1.s = k2.s = k3.s = "";
-        string userMessage = userInputField.text+ "ÑÏ¸ñÒªÇóÖ»»Ø¸´´Ë»æ±¾µÄ±êÌâºÍ¾ç±¾£¬Êä³öµÚÒ»ÐÐÎª±êÌâ£¬Ã¿Ò³»æ±¾µÄ¾ç±¾ÓÃÒ»¾ä35¸ö×Ö×óÓÒµÄ»°ÃèÊö£¬Ã¿Ò³µÄ¾çÇéÒªÓÐ¹ØÁª£¬Ã¿¾ä»°¿ªÍ·ÓÃ°¢À­²®Êý×Ö±êºÅ£¬¹²Ê®Ò³£¬±³¾°ÎªÄ§·¨º£Ñó£¬ÃæÏòÖÐ¹úµÄÐ¡Ñ§¶þÄê¼¶Ñ§Éú¡£";
+        string userMessage = userInputField.text+ "ï¿½Ï¸ï¿½Òªï¿½ï¿½Ö»ï¿½Ø¸ï¿½ï¿½Ë»æ±¾ï¿½Ä±ï¿½ï¿½ï¿½Í¾ç±¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Îªï¿½ï¿½ï¿½â£¬Ã¿Ò³ï¿½æ±¾ï¿½Ä¾ç±¾ï¿½ï¿½Ò»ï¿½ï¿½35ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒµÄ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿Ò³ï¿½Ä¾ï¿½ï¿½ï¿½Òªï¿½Ð¹ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ä»°ï¿½ï¿½Í·ï¿½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½Å£ï¿½ï¿½ï¿½Ê®Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªÄ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¹ï¿½ï¿½ï¿½Ð¡Ñ§ï¿½ï¿½ï¿½ê¼¶Ñ§ï¿½ï¿½ï¿½ï¿½";
         userInputField.text = "";
 
-        // Ìí¼ÓÓÃ»§ÏûÏ¢µ½¶Ô»°ÀúÊ·
+        // ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ô»ï¿½ï¿½ï¿½Ê·
         messages.Add(new Dictionary<string, string> { { "role", "user" }, { "content", userMessage } });
 
-        // µ÷ÓÃ DeepSeek API
-        StartCoroutine(CallDeepSeekAPI());
+        // ï¿½ï¿½ï¿½ï¿½ DeepSeek API
+        StartCoroutine(CallDeepSeekAPI());  
     }
 
     private IEnumerator CallDeepSeekAPI()
     {
         string pre_chatOutputText = chatOutputText.text;
-        chatOutputText.text += "\nÉÙÅ®Æíµ»ÖÐ¡£¡£¡£";
-        // ´´½¨ÇëÇóÊý¾Ý
+        chatOutputText.text += "\nï¿½ï¿½Å®ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½";
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         var requestData = new
         {
             model = "deepseek-chat",
@@ -163,7 +163,7 @@ public class DeepSeekChat : MonoBehaviour
 
         string jsonData = JsonConvert.SerializeObject(requestData);
 
-        // ´´½¨ UnityWebRequest
+        // ï¿½ï¿½ï¿½ï¿½ UnityWebRequest
         UnityWebRequest request = new UnityWebRequest(apiUrl, "POST");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonData);
         request.uploadHandler = new UploadHandlerRaw(bodyRaw);
@@ -171,16 +171,16 @@ public class DeepSeekChat : MonoBehaviour
         request.SetRequestHeader("Content-Type", "application/json");
         request.SetRequestHeader("Authorization", "Bearer " + apiKey);
 
-        // ·¢ËÍÇëÇó
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         yield return request.SendWebRequest();
 
         if (request.result == UnityWebRequest.Result.Success)
         {
-            // ½âÎöÏìÓ¦
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦
             var response = JsonConvert.DeserializeObject<DeepSeekResponse>(request.downloadHandler.text);
             string botMessage = response.choices[0].message.content;
 
-            // ÏÔÊ¾ÏìÓ¦
+            // ï¿½ï¿½Ê¾ï¿½ï¿½Ó¦
             chatOutputText.text = pre_chatOutputText;
             chatOutputText.text += "\nAI: \n" + $"<color=#{colorHex}>" + botMessage + "</color>" + "\n";
 
@@ -202,7 +202,7 @@ public class DeepSeekChat : MonoBehaviour
                 sw.Close();
                 fileStream.Close();
             }
-            // Ìí¼Ó AI ÏûÏ¢µ½¶Ô»°ÀúÊ·
+            // ï¿½ï¿½ï¿½ AI ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½Ô»ï¿½ï¿½ï¿½Ê·
             messages.Add(new Dictionary<string, string> { { "role", "assistant" }, { "content", botMessage } });
         }
         else
