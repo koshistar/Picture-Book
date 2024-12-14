@@ -24,16 +24,23 @@ public class DeepSeekChat : MonoBehaviour
     public KeyWords k1,k2,k3;
     private string path;
     private string colorHex;
-    Stack<KeyWords> st = new Stack<KeyWords>();
+    private string originask;
+    private string position;
 
     // Unity UI 元素
     public TMP_InputField userInputField;
     public TextMeshProUGUI chatOutputText;
+    public TextMeshProUGUI AskingText;
+    public TextMeshProUGUI k1_1, k1_2, k1_3, k2_1, k2_2, k2_3, k3_1, k3_2, k3_3;
+
     // 用于存储对话历史
     private List<Dictionary<string, string>> messages = new List<Dictionary<string, string>>();
+    private List<Dictionary<string, string>> messages1 = new List<Dictionary<string, string>>();
     void Start()
     {
         // 初始化系统消息
+        originask = AskingText.text;
+        position = "";
         path = Application.streamingAssetsPath+"/text";
         Debug.Log("datapath:" + path);
         k1.num = k2.num = k3.num = 0;
@@ -133,6 +140,46 @@ public class DeepSeekChat : MonoBehaviour
         k3.num = 16;
         updatekeywords();
     }
+
+    public void SceneButton1Clicked()
+    {
+        AskingText.text = originask;
+        GameObject scene = GameObject.Find("scene1");
+        AskingText.text += scene.GetComponentInChildren<TMP_Text>().text;
+        position = scene.GetComponentInChildren<TMP_Text>().text;
+    }
+
+    public void SceneButton2Clicked()
+    {
+        AskingText.text = originask;
+        GameObject scene = GameObject.Find("scene2");
+        AskingText.text += scene.GetComponentInChildren<TMP_Text>().text;
+        position = scene.GetComponentInChildren<TMP_Text>().text;
+    }
+
+    public void SceneButton3Clicked()
+    {
+        AskingText.text = originask;
+        GameObject scene = GameObject.Find("scene3");
+        AskingText.text += scene.GetComponentInChildren<TMP_Text>().text;
+        position = scene.GetComponentInChildren<TMP_Text>().text;
+    }
+
+    public void SceneButton4Clicked()
+    {
+        AskingText.text = originask;
+        GameObject scene = GameObject.Find("scene4");
+        AskingText.text += scene.GetComponentInChildren<TMP_Text>().text;
+        position = scene.GetComponentInChildren<TMP_Text>().text;
+    }
+
+    public void SceneButton5Clicked()
+    {
+        AskingText.text = originask;
+        GameObject scene = GameObject.Find("scene5");
+        AskingText.text += scene.GetComponentInChildren<TMP_Text>().text;
+        position = scene.GetComponentInChildren<TMP_Text>().text;
+    }
     public void OnSendButtonClicked()
     {
         if (string.IsNullOrEmpty(userInputField.text)) return;
@@ -211,6 +258,101 @@ public class DeepSeekChat : MonoBehaviour
         }
     }
 
+    public void ConfirmButtonClicked()
+    {
+        if (string.IsNullOrEmpty(position)) return;
+
+        string userMessage = "请给出3个三个字及以下的生活在"+position+"的主角的生物物种，以及他们的性格和他们故事的主题，共9个词，用空格分开，前3个为主角，中间3个为性格，最后3个为主题，只输出这9个词，每个词中的汉字不允许复杂，保证小学二年级学生能够阅读。";
+
+        // 添加用户消息到对话历史
+        messages1.Add(new Dictionary<string, string> { { "role", "user" }, { "content", userMessage } });
+
+        // 调用 DeepSeek API
+        StartCoroutine(CallDeepSeekAPI1());
+    }
+
+    private IEnumerator CallDeepSeekAPI1()
+    {
+        // 创建请求数据
+        var requestData = new
+        {
+            model = "deepseek-chat",
+            messages = messages1,
+            stream = false
+        };
+
+        string jsonData = JsonConvert.SerializeObject(requestData);
+
+        // 创建 UnityWebRequest
+        UnityWebRequest request = new UnityWebRequest(apiUrl, "POST");
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonData);
+        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+        request.SetRequestHeader("Authorization", "Bearer " + apiKey);
+
+        // 发送请求
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            // 解析响应
+            var response = JsonConvert.DeserializeObject<DeepSeekResponse>(request.downloadHandler.text);
+            string botMessage = response.choices[0].message.content;
+            Debug.Log(botMessage);
+            int i = 0;
+            string sk = "";
+            while (i < botMessage.Length && botMessage[i] != ' ') sk += botMessage[i++];
+            ++i;
+            k1_1.text = sk;
+
+            sk = "";
+            while (i < botMessage.Length && botMessage[i] != ' ') sk += botMessage[i++];
+            ++i;
+            k1_2.text = sk;
+
+            sk = "";
+            while (i < botMessage.Length && botMessage[i] != ' ') sk += botMessage[i++];
+            ++i;
+            k1_3.text = sk;
+
+            sk = "";
+            while (i < botMessage.Length && botMessage[i] != ' ') sk += botMessage[i++];
+            ++i;
+            k2_1.text = sk;
+
+            sk = "";
+            while (i < botMessage.Length && botMessage[i] != ' ') sk += botMessage[i++];
+            ++i;
+            k2_2.text = sk;
+
+            sk = "";
+            while (i < botMessage.Length && botMessage[i] != ' ') sk += botMessage[i++];
+            ++i;
+            k2_3.text = sk;
+
+            sk = "";
+            while (i < botMessage.Length && botMessage[i] != ' ') sk += botMessage[i++];
+            ++i;
+            k3_1.text = sk;
+
+            sk = "";
+            while (i < botMessage.Length && botMessage[i] != ' ') sk += botMessage[i++];
+            ++i;
+            k3_2.text = sk;
+
+            sk = "";
+            while (i < botMessage.Length && botMessage[i] != ' ') sk += botMessage[i++];
+            ++i;
+            k3_3.text = sk;
+
+            messages1.Add(new Dictionary<string, string> { { "role", "assistant" }, { "content", botMessage } });
+        }
+        else
+        {
+            Debug.LogError("Error: " + request.error);
+        }
+    }
     [System.Serializable]
     public class DeepSeekResponse
     {
