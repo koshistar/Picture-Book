@@ -54,6 +54,9 @@ EditorBuildSettings:
     path: Assets/AI/AI-paint.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
+    path: Assets/AI/AI-music.unity
+    guid: 9b10d15b9769b21418d5be07a2dcc276
+  - enabled: 1
     path: Assets/Scenes/HappyEnding.unity
     guid: 1821042f5580f38439c7b1e8ae727c99
   - enabled: 0

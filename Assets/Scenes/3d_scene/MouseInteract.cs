@@ -74,7 +74,7 @@ public class MouseInteract : MonoBehaviour
 
 					if (parentObject.name == "竖琴")
 					{
-						SceneManager.LoadScene(CurrentScene.currentScene);
+						SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 3);
 					}
 				}
 				else

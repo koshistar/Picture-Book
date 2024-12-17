@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class VideoManager : MonoBehaviour,IPointerMoveHandler
 {
     public VideoPlayer vp;
-    public Text playButtonText;
+    //public Text playButtonText;
     public Text videoTimeText;
     public Slider videoSlider;
     public Slider volumeSlider;
@@ -89,12 +89,12 @@ public class VideoManager : MonoBehaviour,IPointerMoveHandler
         if (vp.isPlaying)
         {
             vp.Pause();
-            playButtonText.text = "播放";
+            //playButtonText.text = "播放";
         }
         else
         {
             vp.Play();
-            playButtonText.text = "暂停";
+            //playButtonText.text = "暂停";
         }
     }
 

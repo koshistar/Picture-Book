@@ -13,10 +13,11 @@ public enum State
 public class SmallGameManager : MonoBehaviour
 {
     public float stretchSpeed = 100f;
-    public float maxStretch = 90f;
+    public float maxStretch = 20f;
     public List<GameObject> fishPrefabs;
     public Text FishNumText;
-    private const float maxup = 1.75f;
+    public List<AudioSource> launchSFXs;
+    private const float maxup = 2.5f;
     private const float maxdown = -4.4f;
     private const float maxleft = -8.1f;
     private const float maxright = 8.1f;
@@ -47,6 +48,7 @@ public class SmallGameManager : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 state = State.Stretch;
+                launchSFXs[UnityEngine.Random.Range(0,launchSFXs.Count-1)].Play();
             }   
         }
         else if (state == State.Stretch)
@@ -75,15 +77,7 @@ public class SmallGameManager : MonoBehaviour
     }
     private void Rock()
     {
-        if (rope.localRotation.z <= -0.6f)
-        {
-            dir = Vector3.forward;
-        }
-        else if (rope.localRotation.z >= 0.6f)
-        {
-            dir= Vector3.back;
-        }
-
+        dir = Vector3.forward;
         rope.Rotate(dir * 60 * Time.deltaTime);
     }
 
@@ -95,13 +89,13 @@ public class SmallGameManager : MonoBehaviour
             return;
         }
         length += stretchSpeed * Time.deltaTime;
-        rope.localScale = new Vector3(rope.localScale.x, length, rope.localScale.z);
+        rope.localScale = new Vector3(length, rope.localScale.y, rope.localScale.z);
     }
 
     private void Vanish()
     {
         length = 1f;
-        rope.localScale = new Vector3(rope.localScale.x, length, rope.localScale.z);
+        rope.localScale = new Vector3(length, rope.localScale.y, rope.localScale.z);
         state=State.Rock;
     }
 
