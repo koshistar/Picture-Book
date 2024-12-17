@@ -1,11 +1,10 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Program : MonoBehaviour
+public class AI_PAINT : MonoBehaviour
 {
     public RawImage showImage;
     public InputField inputText;
@@ -23,8 +22,8 @@ public class Program : MonoBehaviour
     {
         imgPath = "";
         operate();
-        imgPath = Application.streamingAssetsPath + "/img/" + inputText.text + ".png";
-        imgPath = imgPath.Replace(" ", "/");
+        string imgName = inputText.text.Split(" ")[0] + '/' + inputText.text.Split(" ")[1];
+        imgPath = Application.streamingAssetsPath + "/img/" + imgName + ".png";
         imageStr = SetImageToString(imgPath);
 
         Color color = showImage.color;
