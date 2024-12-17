@@ -6,4 +6,5 @@ public class GameData
 {
     public static long fishNumber = 0;
     public static float CD = 5f;
+    public static bool hasFinished = true;
 }

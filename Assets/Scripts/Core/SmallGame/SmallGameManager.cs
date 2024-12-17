@@ -16,6 +16,7 @@ public class SmallGameManager : MonoBehaviour
     public float maxStretch = 20f;
     public List<GameObject> fishPrefabs;
     public Text FishNumText;
+    public Text LoadingText;
     public List<AudioSource> launchSFXs;
     private const float maxup = 2.5f;
     private const float maxdown = -4.4f;
@@ -60,6 +61,14 @@ public class SmallGameManager : MonoBehaviour
             Vanish();
         }
 
+        if (GameData.hasFinished)
+        {
+            LoadingText.text = "生成完成！";
+        }
+        else
+        {
+            LoadingText.text = "生成中。";
+        }
         FishNumText.text = "FishNum: " + GameData.fishNumber;
         timer += Time.deltaTime;
         if (timer > GameData.CD)

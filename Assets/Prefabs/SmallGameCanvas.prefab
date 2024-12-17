@@ -1156,6 +1156,7 @@ MonoBehaviour:
   - {fileID: 6999757979173124709, guid: de060e64cf5aee0478f537a37a34bf54, type: 3}
   - {fileID: 9164366118369494474, guid: 8fddcec8cee36784baa22187489984a9, type: 3}
   FishNumText: {fileID: 4008840791620632819}
+  LoadingText: {fileID: 2954078893930338081}
   launchSFXs:
   - {fileID: 5842546190759301175}
   - {fileID: 9056280347430972768}
