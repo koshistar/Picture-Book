@@ -81,7 +81,9 @@ public class SmallGameManager : MonoBehaviour
     {
         float y = UnityEngine.Random.Range(maxup, maxdown);
         float x = UnityEngine.Random.Range(maxleft, maxright);
-        GameObject.Instantiate(fishPrefabs[UnityEngine.Random.Range(0,fishPrefabs.Count-1)],new Vector3(x,y,rope.position.z),Quaternion.identity);
+        GameObject fishPrefab = fishPrefabs[UnityEngine.Random.Range(0, fishPrefabs.Count - 1)];
+        fishPrefab = GameObject.Instantiate(fishPrefab, new Vector3(x, y, rope.position.z), Quaternion.identity);
+        fishPrefab.transform.SetParent(this.gameObject.transform.parent);
         timer = 0;
     }
     private void Rock()
