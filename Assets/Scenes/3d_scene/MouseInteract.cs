@@ -1,6 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
- using UnityEditor.SearchService;
+ // using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +12,30 @@ public class MouseInteract : MonoBehaviour
 	private Vector3 originalScale= Vector3.one;
 
 	public AudioSource audio;
+
+	private void Start()
+	{
+		if(!GameData.hasGenerateText)
+		{		
+			AudioClip sound = Resources.Load<AudioClip>(FilePaths.GetPathToResource(FilePaths.resources_voices, "guide1"));
+			AudioManager.instance.PlayVoice(sound);
+		}
+		else if(!GameData.hasGenerateImage)
+		{		
+			AudioClip sound = Resources.Load<AudioClip>(FilePaths.GetPathToResource(FilePaths.resources_voices, "guide2"));
+			AudioManager.instance.PlayVoice(sound);
+		}
+		else if(!GameData.hasGenerateAudio)
+		{		
+			AudioClip sound = Resources.Load<AudioClip>(FilePaths.GetPathToResource(FilePaths.resources_voices, "guide3"));
+			AudioManager.instance.PlayVoice(sound);
+		}
+		else
+		{		
+			AudioClip sound = Resources.Load<AudioClip>(FilePaths.GetPathToResource(FilePaths.resources_voices, "guide4"));
+			AudioManager.instance.PlayVoice(sound);
+		}
+	}
 
 	IEnumerator ScaleEffect(GameObject parentObject)
 	{
@@ -64,17 +89,26 @@ public class MouseInteract : MonoBehaviour
 
 					if (parentObject.name == "魔法书")
 					{
+						audio.Stop();
 						SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 					}
 
 					if (parentObject.name == "海螺")
 					{
+						audio.Stop();
 						SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
 					}
 
 					if (parentObject.name == "竖琴")
 					{
+						audio.Stop();
 						SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 3);
+					}
+
+					if (parentObject.name == "工作台")
+					{
+						audio.Stop();
+						SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 4);
 					}
 				}
 				else

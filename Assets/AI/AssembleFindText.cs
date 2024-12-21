@@ -18,24 +18,27 @@ public class AssembleFindText : MonoBehaviour
     private Vector2 sendBtnWithOutline = Vector2.zero;
     private List<string> textFiles = new List<string>();
     private string txtDirPath = Application.streamingAssetsPath + "/text";
-    public string folderPath = "music"; // ÎÄ¼þ¼ÐÂ·¾¶£¬Ïà¶ÔÓÚStreamingAssetsÎÄ¼þ¼Ð
+   // public string FolderPath = "music"; // ï¿½Ä¼ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½StreamingAssetsï¿½Ä¼ï¿½ï¿½ï¿½
     private AudioSource audioSource;
     private List<AudioClip> audioClips = new List<AudioClip>();
     private int currentClipIndex = 0;
     void Start()
     {
+        AudioClip sound = Resources.Load<AudioClip>(FilePaths.GetPathToResource(FilePaths.resources_voices, "guide8"));
+        AudioManager.instance.PlayVoice(sound);
         FindBtn.onClick.AddListener(FindBtnFunc);
         audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     IEnumerator LoadAudioClips(string txtName)
     {
-        // »ñÈ¡StreamingAssetsÎÄ¼þ¼ÐµÄÍêÕûÂ·¾¶
-        string streamingAssetsPath = folderPath+'/'+txtName;
+        // ï¿½ï¿½È¡StreamingAssetsï¿½Ä¼ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½
+        string streamingAssetsPath =Application.streamingAssetsPath+ "/music" +'/'+txtName;
 
         Debug.Log(streamingAssetsPath);
-        // »ñÈ¡ÎÄ¼þ¼ÐÖÐµÄËùÓÐÎÄ¼þ
+        // ï¿½ï¿½È¡ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
         string[] files = System.IO.Directory.GetFiles(streamingAssetsPath, "*.mp3");
+        // string[] files=Application.streamingAssetsPath + "/" + txtName;
 
         if (files.Length == 0)
         {
@@ -43,13 +46,13 @@ public class AssembleFindText : MonoBehaviour
             yield break;
         }
 
-        // ±éÀúÎÄ¼þ²¢¼ÓÔØÒôÆµ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµ
         foreach (string file in files)
         {
-            string url = "file://" + file; // ¹¹½¨ÎÄ¼þµÄURL
+            string url = "file://" + file; // ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½URL
             using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(url, AudioType.MPEG))
             {
-                yield return www.SendWebRequest(); // ·¢ËÍÇëÇó
+                yield return www.SendWebRequest(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
                 if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
                 {
@@ -70,7 +73,7 @@ public class AssembleFindText : MonoBehaviour
             }
         }
 
-        // ¿ªÊ¼²¥·ÅµÚÒ»¸öÒôÆµ
+        // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Åµï¿½Ò»ï¿½ï¿½ï¿½ï¿½Æµ
         if (audioClips.Count > 0)
         {
             PlayNextClip();
@@ -88,14 +91,14 @@ public class AssembleFindText : MonoBehaviour
             return;
         }
 
-        // ²¥·Åµ±Ç°ÒôÆµÎÄ¼þ
+        // ï¿½ï¿½ï¿½Åµï¿½Ç°ï¿½ï¿½Æµï¿½Ä¼ï¿½
         audioSource.clip = audioClips[currentClipIndex];
         audioSource.Play();
 
-        // ÉèÖÃÏÂÒ»¸öÒôÆµÎÄ¼þµÄË÷Òý
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Æµï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         currentClipIndex = (currentClipIndex + 1) % audioClips.Count;
 
-        // ÔÚµ±Ç°ÒôÆµ²¥·ÅÍê±Ïºó£¬²¥·ÅÏÂÒ»¸öÒôÆµ
+        // ï¿½Úµï¿½Ç°ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïºó£¬²ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Æµ
         StartCoroutine(WaitForClipToFinish());
     }
 
@@ -106,7 +109,7 @@ public class AssembleFindText : MonoBehaviour
             yield return null;
         }
 
-        // µ±Ç°ÒôÆµ²¥·ÅÍê±Ïºó£¬²¥·ÅÏÂÒ»¸öÒôÆµ
+        // ï¿½ï¿½Ç°ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïºó£¬²ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Æµ
         PlayNextClip();
     }
     void FindBtnFunc()
@@ -117,10 +120,10 @@ public class AssembleFindText : MonoBehaviour
     public void InstantiateList()
     {
         TextBtn = GameObject.Find("textBtn");
-        int btnPos = 0; //µÚÒ»¸öButtonµÄYÖáÎ»ÖÃ
-        int btnHeight = 60; //ButtonµÄ¸ß¶È
-        int spaceHeight = 20; //ButtonÖ®¼äµÄ¼ä¸ô
-        int btnCount = textFiles.Count; //ButtonµÄÊýÁ¿
+        int btnPos = 0; //ï¿½ï¿½Ò»ï¿½ï¿½Buttonï¿½ï¿½Yï¿½ï¿½Î»ï¿½ï¿½
+        int btnHeight = 60; //Buttonï¿½Ä¸ß¶ï¿½
+        int spaceHeight = 20; //ButtonÖ®ï¿½ï¿½Ä¼ï¿½ï¿½
+        int btnCount = textFiles.Count; //Buttonï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         float btnLength = 0;
 
         GameObject TxtContainer = GameObject.Find("TxtContainer");
@@ -145,7 +148,7 @@ public class AssembleFindText : MonoBehaviour
             GameObject TextBtnClone = Instantiate(TextBtn);
             TextBtnClone.transform.SetParent(TxtList.transform);
             TextBtnClone.GetComponent<Outline>().effectColor = color;
-            TextBtnClone.transform.localScale = new Vector3(1, 1, 1);    //ÓÉÓÚ¿ËÂ¡µÄButtonËõ·Å±»ÉèÖÃÎª0£¬ËùÒÔÕâÀïÒªÉèÖÃÎª1
+            TextBtnClone.transform.localScale = new Vector3(1, 1, 1);    //ï¿½ï¿½ï¿½Ú¿ï¿½Â¡ï¿½ï¿½Buttonï¿½ï¿½ï¿½Å±ï¿½ï¿½ï¿½ï¿½ï¿½Îª0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½Îª1
             TextBtnClone.transform.localPosition = new Vector3(0, btnPos, 0);
             var btn_rectTransform = TextBtnClone.transform.GetComponent<RectTransform>();
             btn_rectTransform.sizeDelta = new Vector2(btnLength, btnHeight);
@@ -154,17 +157,17 @@ public class AssembleFindText : MonoBehaviour
             (
                 () =>
                 {
-                    TextBtnFunc(text);    //Ìí¼Ó°´Å¥µã»÷ÊÂ¼þ
+                    TextBtnFunc(text);    //ï¿½ï¿½Ó°ï¿½Å¥ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
                 }
             );
 
-            //ÏÂÒ»¸öButtonµÄÎ»ÖÃµÈÓÚµ±Ç°¼õÈ¥ËûµÄ¸ß¶È
+            //ï¿½ï¿½Ò»ï¿½ï¿½Buttonï¿½ï¿½Î»ï¿½Ãµï¿½ï¿½Úµï¿½Ç°ï¿½ï¿½È¥ï¿½ï¿½ï¿½Ä¸ß¶ï¿½
             btnPos = btnPos - btnHeight;
         }
         btnNum = btnCount;
     }
     /// <summary>
-    /// »ñµÃÎÄ¼þÏÂµÄËùÓÐÎÄ¼þÃû
+    /// ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Âµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
     /// </summary>
     private void GetDirectoryFile()
     {
@@ -193,9 +196,9 @@ public class AssembleFindText : MonoBehaviour
                     continue;
                 }
                 textFiles.Add(files[i].Name.Replace(".txt", ""));
-                //UnityEngine.Debug.Log("Name : " + textFiles[i].Name);//ÎÄ¼þÃû
-                Debug.Log("FullName : " + files[i].FullName);//¸ùÄ¿Â¼ÏÂµÄÎÄ¼þµÄÄ¿Â¼
-                //UnityEngine.Debug.Log("DirectoryName : " + textFiles[i].DirectoryName);//¸ùÄ¿Â¼
+                //UnityEngine.Debug.Log("Name : " + textFiles[i].Name);//ï¿½Ä¼ï¿½ï¿½ï¿½
+                Debug.Log("FullName : " + files[i].FullName);//ï¿½ï¿½Ä¿Â¼ï¿½Âµï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ä¿Â¼
+                //UnityEngine.Debug.Log("DirectoryName : " + textFiles[i].DirectoryName);//ï¿½ï¿½Ä¿Â¼
             }
             InstantiateList();
         }
@@ -204,7 +207,7 @@ public class AssembleFindText : MonoBehaviour
     private void TextBtnFunc(string txtName)
     {
         ReadText(txtName);
-        StartCoroutine(LoadAudioClips(txtName)); // Æô¶¯Ð­³Ì¼ÓÔØÒôÆµÎÄ¼þ
+        StartCoroutine(LoadAudioClips(txtName)); // ï¿½ï¿½ï¿½ï¿½Ð­ï¿½Ì¼ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½Ä¼ï¿½
     }
 
     private void ReadText(string txtName)
@@ -213,9 +216,9 @@ public class AssembleFindText : MonoBehaviour
 
         GameObject TxtTxt = GameObject.Find("TxtTxt");
         
-        int btnPos = 0; //µÚÒ»¸öButtonµÄYÖáÎ»ÖÃ
-        int btnHeight = 80; //ButtonµÄ¸ß¶È
-        int btnCount = textTxt.Length; //ButtonµÄÊýÁ¿
+        int btnPos = 0; //ï¿½ï¿½Ò»ï¿½ï¿½Buttonï¿½ï¿½Yï¿½ï¿½Î»ï¿½ï¿½
+        int btnHeight = 80; //Buttonï¿½Ä¸ß¶ï¿½
+        int btnCount = textTxt.Length; //Buttonï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         
         GameObject TxtTxtList = GameObject.Find("TxtTxtList");
         Debug.Log(btnCount);
@@ -238,7 +241,7 @@ public class AssembleFindText : MonoBehaviour
             wholeStory += text;
             GameObject TxtTxtClone = Instantiate(TxtTxt);
             TxtTxtClone.transform.SetParent(TxtTxtList.transform);
-            TxtTxtClone.transform.localScale = new Vector3(1, 1, 1);    //ÓÉÓÚ¿ËÂ¡µÄButtonËõ·Å±»ÉèÖÃÎª0£¬ËùÒÔÕâÀïÒªÉèÖÃÎª1
+            TxtTxtClone.transform.localScale = new Vector3(1, 1, 1);    //ï¿½ï¿½ï¿½Ú¿ï¿½Â¡ï¿½ï¿½Buttonï¿½ï¿½ï¿½Å±ï¿½ï¿½ï¿½ï¿½ï¿½Îª0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½Îª1
             TxtTxtClone.transform.localPosition = new Vector3(0, btnPos, 0);
             var btn_rectTransform = TxtTxtClone.transform.GetComponent<RectTransform>();
             btn_rectTransform.sizeDelta = new Vector2(width, btnHeight);
@@ -247,11 +250,11 @@ public class AssembleFindText : MonoBehaviour
             (
                 () =>
                 {
-                    Click(txtName + text);    //Ìí¼Ó°´Å¥µã»÷ÊÂ¼þ
+                    Click(txtName + text);    //ï¿½ï¿½Ó°ï¿½Å¥ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
                 }
             );
 
-            //ÏÂÒ»¸öButtonµÄÎ»ÖÃµÈÓÚµ±Ç°¼õÈ¥ËûµÄ¸ß¶È
+            //ï¿½ï¿½Ò»ï¿½ï¿½Buttonï¿½ï¿½Î»ï¿½Ãµï¿½ï¿½Úµï¿½Ç°ï¿½ï¿½È¥ï¿½ï¿½ï¿½Ä¸ß¶ï¿½
             btnPos = btnPos - btnHeight;
         }
     }
@@ -275,7 +278,7 @@ public class AssembleFindText : MonoBehaviour
     private void Click(string text)
     {
         text = text.Replace(" ", "");
-        int sepID = text.IndexOf('¡·');
+        int sepID = text.IndexOf('ã€‹');
         text = text.Substring(0, sepID + 1) + " " + text.Substring(sepID + 1, text.Length - sepID - 2);
         inputText.text = text;
         Debug.Log(text);

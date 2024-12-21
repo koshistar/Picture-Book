@@ -29,4 +29,20 @@ public class exit : MonoBehaviour
     {
         gb.SetActive(true);
     }
+
+    public void ContinueStory()
+    {
+        if (!GameData.hasGenerateText || !GameData.hasGenerateImage || !GameData.hasGenerateAudio)
+        {
+            SceneManager.LoadScene(12);
+        }
+        else
+        {
+            GameData.hasGenerateAudio = false;
+            GameData.hasGenerateText = false;
+            GameData.hasGenerateImage = false;
+        
+            SceneManager.LoadScene(CurrentScene.currentScene);   
+        }
+    }
 }

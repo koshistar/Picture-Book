@@ -15,6 +15,10 @@ public class AI_PAINT : MonoBehaviour
 
     void Start()
     {
+        	
+        AudioClip sound = Resources.Load<AudioClip>(FilePaths.GetPathToResource(FilePaths.resources_voices, "guide6"));
+        AudioManager.instance.PlayVoice(sound);
+            
         SendBtn.onClick.AddListener(SendBtnFunc);
     }
 
@@ -22,6 +26,11 @@ public class AI_PAINT : MonoBehaviour
     {
         imgPath = "";
         operate();
+
+        GameData.hasFinished = true;
+        GameData.CD -= 0.1f;
+        GameData.hasGenerateImage = true;
+        
         string imgName = inputText.text.Split(" ")[0] + '/' + inputText.text.Split(" ")[1];
         imgPath = Application.streamingAssetsPath + "/img/" + imgName + ".png";
         imageStr = SetImageToString(imgPath);
@@ -49,7 +58,7 @@ public class AI_PAINT : MonoBehaviour
             string output = process.StandardOutput.ReadToEnd();
             string error = process.StandardError.ReadToEnd();
 
-            process.WaitForExit();
+            //process.WaitForExit();
             UnityEngine.Debug.LogFormat("Painting finished, output:{0}", output);
         }
 

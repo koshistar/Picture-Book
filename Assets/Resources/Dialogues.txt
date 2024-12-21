@@ -158,4 +158,5 @@ tkc.Hide()
 Narrator "别以为我没告诉你点击物品进入相应的场景。"
 
 [wait]HideUI(-s 0.5)
+StopSong("Sea of Dreams")
 nextScene(12)

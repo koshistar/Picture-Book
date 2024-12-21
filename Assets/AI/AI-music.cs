@@ -16,6 +16,8 @@ public class AI_MUSIC : MonoBehaviour
 
     void Start()
     {
+        AudioClip sound = Resources.Load<AudioClip>(FilePaths.GetPathToResource(FilePaths.resources_voices, "guide7"));
+        AudioManager.instance.PlayVoice(sound);
         SendBtn.onClick.AddListener(SendBtnFunc);
     }
 
@@ -29,6 +31,11 @@ public class AI_MUSIC : MonoBehaviour
         prompt = prompt.Substring(0, sepID + 1) + " " + prompt.Substring(sepID + 1, prompt.Length - sepID - 2);
         UnityEngine.Debug.LogFormat("prompt:{0}", prompt);
         operate(prompt);
+        
+        GameData.hasFinished = true;
+        GameData.CD -= 0.1f;
+        GameData.hasGenerateAudio = true;
+        
         GetDirectoryFile();
     }
 
@@ -49,7 +56,7 @@ public class AI_MUSIC : MonoBehaviour
             string output = process.StandardOutput.ReadToEnd();
             string error = process.StandardError.ReadToEnd();
 
-            process.WaitForExit();
+            //process.WaitForExit();
             UnityEngine.Debug.LogFormat("finished, output:{0}", output);
         }
     }

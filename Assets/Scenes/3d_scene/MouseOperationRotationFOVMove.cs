@@ -10,6 +10,7 @@ public class MouseOperationCameraRotationFovMove : MonoBehaviour
         LeftMouseBtn
     }
 
+    public float sensitivity = 2f;
 
 
     private MouseState mMouseState = MouseState.None;
@@ -45,9 +46,10 @@ public class MouseOperationCameraRotationFovMove : MonoBehaviour
     public float xRotationSpeed = 250.0f;
     public float yRotationSpeed = 120.0f;
     //旋转角度
-    private float xRotation = 0.0f;
-    private float yRotation = 0.0f;
+    // private float xRotation = 0.0f;
+    // private float yRotation = 0.0f;
 
+    private Vector2 mouseLook;
     /// <summary>
     /// 鼠标移动进行旋转
     /// </summary>
@@ -56,15 +58,28 @@ public class MouseOperationCameraRotationFovMove : MonoBehaviour
         if (mMouseState == MouseState.None)
         {
 
-            //Input.GetAxis("MouseX")获取鼠标移动的X轴的距离
-            xRotation -= Input.GetAxis("Mouse X") * xRotationSpeed * 0.02f;
-            yRotation += Input.GetAxis("Mouse Y") * yRotationSpeed * 0.02f;
+            // //Input.GetAxis("MouseX")获取鼠标移动的X轴的距离
+            // xRotation -= Input.GetAxis("Mouse X") * xRotationSpeed * 0.02f;
+            // yRotation += Input.GetAxis("Mouse Y") * yRotationSpeed * 0.02f;
+            //
+            // yRotation = ClampValue(yRotation, yRotationMinLimit, yRotationMaxLimit);//这个函数在结尾
+            //                                         //欧拉角转化为四元数
+            // Quaternion rotation = Quaternion.Euler(-yRotation, -xRotation, 0);
+            // transform.rotation = rotation;
 
-            yRotation = ClampValue(yRotation, yRotationMinLimit, yRotationMaxLimit);//这个函数在结尾
-                                                    //欧拉角转化为四元数
-            Quaternion rotation = Quaternion.Euler(-yRotation, -xRotation, 0);
-            transform.rotation = rotation;
+            Vector2 input = Vector2.zero;
+            if (Input.GetMouseButton(0))
+            {
+                input = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+            }
 
+            if (Input.touchCount > 0)
+            {
+                input=new Vector2(Input.GetTouch(0).deltaPosition.x,Input.GetTouch(0).deltaPosition.y);
+            }
+            mouseLook += input * sensitivity;
+            transform.localRotation=Quaternion.AngleAxis(-mouseLook.y, Vector3.right);
+            transform.parent.localRotation = Quaternion.AngleAxis(mouseLook.x, Vector3.up);
         }
     }
 
@@ -79,7 +94,6 @@ public class MouseOperationCameraRotationFovMove : MonoBehaviour
     public float fovSpeed = 50.0f;
     //fov 角度
     private float fov = 0.0f;
-
     void GetDefaultFov() {
         fov = mCamera.fieldOfView;
     }
