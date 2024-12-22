@@ -11,13 +11,14 @@ public class PaintFindTexts : MonoBehaviour
     public InputField inputText;
     private Vector2 sendBtnWithOutline = Vector2.zero;
     private List<string> textFiles = new List<string> ();
-    private string txtDirPath = Application.streamingAssetsPath + "/text";
+    private string txtDirPath;
 
     void Start()
     {
         FindBtn.onClick.AddListener(FindBtnFunc);
         if (sendBtnWithOutline.Equals(Vector2.zero))
         {
+            txtDirPath = Application.persistentDataPath + "/text";
             GameObject sendBtn = GameObject.Find("sendBtn");
             var sendBtnRectTransform = sendBtn.transform.GetComponent<RectTransform>();
             sendBtnWithOutline = new Vector2(sendBtnRectTransform.rect.width - 10, sendBtnRectTransform.rect.height - 10);
@@ -175,8 +176,8 @@ public class PaintFindTexts : MonoBehaviour
     private void Click(string text)
     {
         text = text.Replace(" ","");
-        int sepID = text.IndexOf('》');
-        text = text.Substring(0, sepID + 1) + " " + text.Substring(sepID + 1, text.Length - sepID - 2);
+        int sepID = text.IndexOf('.');
+        text = text.Substring(0, sepID - 1) + " " + text.Substring(sepID - 1, text.Length - sepID);
         inputText.text = text;
         Debug.Log(text);
         inputText.text += ' ' + wholeStory;

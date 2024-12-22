@@ -17,13 +17,14 @@ public class AssembleFindText : MonoBehaviour
     public TextMeshProUGUI inputText;
     private Vector2 sendBtnWithOutline = Vector2.zero;
     private List<string> textFiles = new List<string>();
-    private string txtDirPath = Application.streamingAssetsPath + "/text";
+    private string txtDirPath;
    // public string FolderPath = "music"; // �ļ���·���������StreamingAssets�ļ���
     private AudioSource audioSource;
     private List<AudioClip> audioClips = new List<AudioClip>();
     private int currentClipIndex = 0;
     void Start()
     {
+        txtDirPath = Application.persistentDataPath + "/text";
         AudioClip sound = Resources.Load<AudioClip>(FilePaths.GetPathToResource(FilePaths.resources_voices, "guide8"));
         AudioManager.instance.PlayVoice(sound);
         FindBtn.onClick.AddListener(FindBtnFunc);
@@ -33,16 +34,16 @@ public class AssembleFindText : MonoBehaviour
     IEnumerator LoadAudioClips(string txtName)
     {
         // ��ȡStreamingAssets�ļ��е�����·��
-        string streamingAssetsPath =Application.streamingAssetsPath+ "/music" +'/'+txtName;
+        string persistentDataPath =Application.persistentDataPath+ "/music" +'/'+txtName;
 
-        Debug.Log(streamingAssetsPath);
+        Debug.Log(persistentDataPath);
         // ��ȡ�ļ����е������ļ�
-        string[] files = System.IO.Directory.GetFiles(streamingAssetsPath, "*.mp3");
-        // string[] files=Application.streamingAssetsPath + "/" + txtName;
+        string[] files = System.IO.Directory.GetFiles(persistentDataPath, "*.mp3");
+        // string[] files=Application.persistentDataPath + "/" + txtName;
 
         if (files.Length == 0)
         {
-            Debug.LogError("No MP3 files found in folder: " + streamingAssetsPath);
+            Debug.LogError("No MP3 files found in folder: " + persistentDataPath);
             yield break;
         }
 
@@ -287,12 +288,12 @@ public class AssembleFindText : MonoBehaviour
         string imgPath = "";
         string imgName = inputText.text.Split(" ")[0] + '/' + inputText.text.Split(" ")[1];
         Debug.Log(imgName);
-        imgPath = Application.streamingAssetsPath + "/img/" + imgName + ".png";
+        imgPath = Application.persistentDataPath + "/img/" + imgName + ".png";
         Debug.Log(imgPath);
         string imageStr="";
         if (!File.Exists(imgPath))
         {   
-            imgPath = Application.streamingAssetsPath + "/img/white.png";
+            imgPath = Application.persistentDataPath + "/img/white.png";
             imageStr = SetImageToString(imgPath);
             Color color = showImage.color;
             color.a = 1;

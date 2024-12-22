@@ -12,13 +12,14 @@ public class AI_PAINT : MonoBehaviour
     public RawImage showImage;
     public InputField inputText;
     public Button SendBtn;
-    private string APIexePath = UnityEngine.Application.dataPath + "/qianfanAPI/qianfan_paint.exe";
+    private string APIexePath = UnityEngine.Application.streamingAssetsPath + "/qianfanAPI/qianfan_paint.exe";
     private string imgPath;
+    private string imgDir;
     private string imageStr;
 
     void Start()
     {
-
+        imgDir = UnityEngine.Application.persistentDataPath + "/img";
         AudioClip sound = Resources.Load<AudioClip>(FilePaths.GetPathToResource(FilePaths.resources_voices, "guide6"));
         AudioManager.instance.PlayVoice(sound);
 
@@ -35,7 +36,7 @@ public class AI_PAINT : MonoBehaviour
         ProcessStartInfo startInfo = new ProcessStartInfo()
         {
             FileName = APIexePath,
-            Arguments = $"{inputText.text}",
+            Arguments = $"{inputText.text + " " + imgDir}",
             RedirectStandardOutput = true,
             RedirectStandardError = true,
             UseShellExecute = false,
@@ -58,7 +59,7 @@ public class AI_PAINT : MonoBehaviour
         UnityEngine.Debug.LogFormat("Painting finished, output:{0}", output);
 
         string imgName = inputText.text.Split(" ")[0] + '/' + inputText.text.Split(" ")[1];
-        imgPath = UnityEngine.Application.streamingAssetsPath + "/img/" + imgName + ".png";
+        imgPath = imgDir + "/" + imgName + ".png";
         imageStr = SetImageToString(imgPath);
         UnityMainThreadDispatcher.Instance().Enqueue(() =>
         {

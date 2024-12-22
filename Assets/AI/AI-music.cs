@@ -14,11 +14,12 @@ public class AI_MUSIC : MonoBehaviour
     public InputField inputText;
     private string musicDirPath;
     private List<string> musicFiles = new List<string>();
-    private string rawMusicDirPath = Application.streamingAssetsPath + "/music";
-    private string APIexePath = Application.dataPath + "/foxAPI/foxai_music.exe";
+    private string rawMusicDirPath;
+    private string APIexePath = Application.streamingAssetsPath + "/foxAPI/foxai_music.exe";
 
     void Start()
     {
+        rawMusicDirPath = Application.persistentDataPath + "/music";
         AudioClip sound = Resources.Load<AudioClip>(FilePaths.GetPathToResource(FilePaths.resources_voices, "guide7"));
         AudioManager.instance.PlayVoice(sound);
         SendBtn.onClick.AddListener(SendBtnFunc);
@@ -28,10 +29,10 @@ public class AI_MUSIC : MonoBehaviour
     {
         string prompt = inputText.text.Replace("\n", "");
         if (string.IsNullOrEmpty(prompt)) return;
-        int sepID = prompt.IndexOf('》');
-        musicDirPath = rawMusicDirPath + '/' + prompt.Substring(0, sepID + 1);
+        int sepID = prompt.IndexOf('.');
+        musicDirPath = rawMusicDirPath + '/' + prompt.Substring(0, sepID - 1);
         UnityEngine.Debug.LogFormat("musicDirPath:{0}", musicDirPath);
-        prompt = prompt.Substring(0, sepID + 1) + " " + prompt.Substring(sepID + 1, prompt.Length - sepID - 2);
+        prompt = prompt.Substring(0, sepID - 1) + " " + prompt.Substring(sepID, prompt.Length - sepID);
         UnityEngine.Debug.LogFormat("prompt:{0}", prompt);
         Operate(prompt); 
         
@@ -42,7 +43,7 @@ public class AI_MUSIC : MonoBehaviour
         ProcessStartInfo startInfo = new ProcessStartInfo()
         {
             FileName = APIexePath,
-            Arguments = $"{prompt}",
+            Arguments = $"{prompt + " " + rawMusicDirPath}",
             RedirectStandardOutput = true,
             RedirectStandardError = true,
             UseShellExecute = false,

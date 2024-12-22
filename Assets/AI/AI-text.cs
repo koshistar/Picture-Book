@@ -44,8 +44,14 @@ public class DeepSeekChat : MonoBehaviour
         // 初始化系统消息
         originask = AskingText.text;
         position = "";
-        path = Application.streamingAssetsPath + "/text";
-        Debug.Log("datapath:" + path);
+        path = Application.persistentDataPath + "/text";
+        if (!Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path);
+            Debug.Log("create datapath:" + path);
+        }
+        else
+            Debug.Log("datapath:" + path);
         k1.num = k2.num = k3.num = 0;
         k1.s = k2.s = k3.s = "";
         messages.Add(new Dictionary<string, string> { { "role", "system" }, { "content", "You are a helpful assistant." } });

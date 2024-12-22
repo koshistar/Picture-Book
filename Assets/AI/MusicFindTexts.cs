@@ -13,11 +13,13 @@ public class MusicFindTexts : MonoBehaviour
     private string musicDirPath;
     private List<string> textFiles = new List<string> ();
     private List<string> musicFiles = new List<string>();
-    private string txtDirPath = Application.streamingAssetsPath + "/text";
-    private string rawMusicDirPath = Application.streamingAssetsPath + "/music";
+    private string txtDirPath;
+    private string rawMusicDirPath;
 
     void Start()
     {
+        txtDirPath = Application.persistentDataPath + "/text";
+        rawMusicDirPath = Application.persistentDataPath + "/music";
         FindBtn.onClick.AddListener(FindBtnFunc);
     }
 
