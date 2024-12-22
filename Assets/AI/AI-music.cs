@@ -1,3 +1,6 @@
+using PimDeWitte.UnityMainThreadDispatcher;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -30,16 +33,11 @@ public class AI_MUSIC : MonoBehaviour
         UnityEngine.Debug.LogFormat("musicDirPath:{0}", musicDirPath);
         prompt = prompt.Substring(0, sepID + 1) + " " + prompt.Substring(sepID + 1, prompt.Length - sepID - 2);
         UnityEngine.Debug.LogFormat("prompt:{0}", prompt);
-        operate(prompt);
+        Operate(prompt); 
         
-        GameData.hasFinished = true;
-        GameData.CD -= 0.1f;
-        GameData.hasGenerateAudio = true;
-        
-        GetDirectoryFile();
     }
 
-    void operate(string prompt)
+    private void Operate(string prompt)
     {
         ProcessStartInfo startInfo = new ProcessStartInfo()
         {
@@ -51,14 +49,24 @@ public class AI_MUSIC : MonoBehaviour
             CreateNoWindow = true
         };
 
-        using (Process process = Process.Start(startInfo))
-        {
-            string output = process.StandardOutput.ReadToEnd();
-            string error = process.StandardError.ReadToEnd();
+        Process process = Process.Start(startInfo);
+        process.EnableRaisingEvents = true;
 
-            //process.WaitForExit();
-            UnityEngine.Debug.LogFormat("finished, output:{0}", output);
-        }
+        process.Exited += UpdateGameDataAfterProcessExit;
+    }
+
+    private void UpdateGameDataAfterProcessExit(object sender, EventArgs args)
+    {
+        Process process = (Process)sender;
+        string output = process.StandardOutput.ReadToEnd();
+        string error = process.StandardError.ReadToEnd();
+
+        UnityEngine.Debug.LogFormat("Music creating finished, output:{0}", output);
+
+        UnityMainThreadDispatcher.Instance().Enqueue(() =>
+        {
+            GetDirectoryFile();
+        });
     }
 
     /// <summary>
@@ -95,7 +103,8 @@ public class AI_MUSIC : MonoBehaviour
     {
         SongBtn = GameObject.Find("SongBtn");
         int btnPos = 0; //第一个Button的Y轴位置
-        int btnLength = 200; //Button的长宽
+        int btnLength = 150; //Button的长宽
+        int spaceHeight = 50; //Button之间的间隔
         int btnCount = musicFiles.Count; //Button的数量
 
         GameObject SongContainer = GameObject.Find("SongContainer");
@@ -103,8 +112,8 @@ public class AI_MUSIC : MonoBehaviour
 
         GameObject SongList = GameObject.Find("SongList");
         var rectTransform = SongList.transform.GetComponent<RectTransform>();
-        SongList.transform.localPosition = new Vector3(0 - (btnLength * btnCount) / 2 - rectTransform.rect.height / 2, 0, 0);
-        rectTransform.sizeDelta = new Vector2(btnLength * btnCount, btnLength);
+        SongList.transform.localPosition = new Vector3(0 - ((btnLength + spaceHeight) * btnCount) / 2 - rectTransform.rect.height / 2, 0, 0);
+        rectTransform.sizeDelta = new Vector2((btnLength + spaceHeight) * btnCount, btnLength);
 
         RemoveAllChildren(SongList);
         for (int i = 0; i < btnCount; i++)
@@ -126,7 +135,7 @@ public class AI_MUSIC : MonoBehaviour
             );
 
             //下一个Button的位置等于当前减去他的高度
-            btnPos = btnPos - btnLength;
+            btnPos = btnPos - btnLength / 2;
         }
     }
     public static void RemoveAllChildren(GameObject parent)
